@@ -75,9 +75,9 @@ name - Name of the custom event. (Mandatory)
 data - Any type of data in string format.
 
 The following example shows the implementation of the 'onClick' event listener to any element.
-
-let custom_data = "{\"identifier1\": \"test\",\"identifier2\": 1,\"identifier3\":true}"
 ```js
+let custom_data = "{\"identifier1\": \"test\",\"identifier2\": 1,\"identifier3\":true}"
+
 tracker('trackCustomEvent', {
     name: "custom_event_name",
     data: custom_data
