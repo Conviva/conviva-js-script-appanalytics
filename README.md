@@ -11,7 +11,7 @@ To use the application sensor, use at_0.2.11.js file from this repository
 ### Initialization
 
 #### Add the following script to the HTML head section of your website:
-```
+```js
 <script type="text/javascript" async=1>
 ;
 (function(p, l, o, w, i, n, g) {
@@ -32,7 +32,7 @@ To use the application sensor, use at_0.2.11.js file from this repository
 </script>
 ```
 #### Initialize the tracker
-```
+```js
 window.apptracker('convivaAppTracker',  {
     appId: '{{YOUR_APP_ID_ADVISED_BY_Conviva}}',
     convivaCustomerKey: '{{YOUR_CUSTOMER_KEY_ADVISED_BY_Conviva}}',
@@ -42,24 +42,24 @@ window.apptracker('convivaAppTracker',  {
 });
 ```    
 #### Set the user id (viewer id)
-```
+```js
 // Set this after initializing the tracker and before autocollection
 window.apptracker('setUserId','replace_me_by_the_userId');
 ```
 
 #### Enable autocollection
-```
+```js
 window.apptracker('enableLinkClickTracking');
 window.apptracker('enableButtonClickTracking');
 ```
 #### Enable Error Tracking
 To enable automatic tracking of run-time exceptions in the application, use the following API:
-```
+```js
 window.apptracker('enableErrorTracking');
 ```
 Alternatively, you could report exceptions manually using the following API:
 
-```
+```js
 window.apptracker('trackError', {
     message: 'Cannot get user object', 
     filename: 'shop.js', 
@@ -77,7 +77,7 @@ data - Any type of data in string format.
 The following example shows the implementation of the 'onClick' event listener to any element.
 
 let custom_data = "{\"identifier1\": \"test\",\"identifier2\": 1,\"identifier3\":true}"
-```
+```js
 tracker('trackCustomEvent', {
     name: "custom_event_name",
     data: custom_data
