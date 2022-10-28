@@ -47,6 +47,11 @@ window.apptracker('convivaAppTracker',  {
 window.apptracker('setUserId','replace_me_by_the_userId');
 ```
 
+#### Report Page View for tracking in-app page navigations.
+```js
+window.apptracker('trackPageView');
+```
+
 #### Enable autocollection
 ```js
 window.apptracker('enableLinkClickTracking');
@@ -61,8 +66,8 @@ Alternatively, you could report exceptions manually using the following API:
 
 ```js
 window.apptracker('trackError', {
-    message: 'Cannot get user object', 
-    filename: 'shop.js', 
+    message: 'Cannot get user object',
+    filename: 'shop.js',
     error: exceptionObj //Exception object containing properties describing the exception.
 });
 ```
