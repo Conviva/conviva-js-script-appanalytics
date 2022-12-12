@@ -6,7 +6,7 @@ Use Application Analytics to autocollect events, track application specific even
 To use the video sensor, download the Core JavaScript SDK file (version 4.5.6 or above) from Conviva JavaScript Sensor Integration and unzip the downloaded file.
 
 ### Download
-To use the application sensor, use at_0.2.11.js file from this repository
+To use the application sensor, use convivaAppTracker.js file from this repository
 
 ### Initialization
 
