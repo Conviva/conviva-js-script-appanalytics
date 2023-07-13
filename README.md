@@ -14,7 +14,7 @@ To use the application sensor, use convivaAppTracker.js file from this repositor
 ```js
 <script type="text/javascript" async>
 
-(function(p, l, o, w, i, n, g) {
+(function(p, i) {
     if (!p[i]) {
         p.GlobalSnowplowNamespace = p.GlobalSnowplowNamespace || [];
         p.GlobalSnowplowNamespace.push(i);
