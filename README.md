@@ -12,8 +12,8 @@ To use the application sensor, use convivaAppTracker.js file from this repositor
 
 #### Add the following script to the HTML head section of your website:
 ```js
-<script type="text/javascript" async=1>
-;
+<script type="text/javascript" async>
+
 (function(p, l, o, w, i, n, g) {
     if (!p[i]) {
         p.GlobalSnowplowNamespace = p.GlobalSnowplowNamespace || [];
@@ -22,14 +22,11 @@ To use the application sensor, use convivaAppTracker.js file from this repositor
             (p[i].q = p[i].q || []).push(arguments)
         };
         p[i].q = p[i].q || [];
-        n = l.createElement(o);
-        g = l.getElementsByTagName(o)[0];
-        n.async = 1;
-        n.src = w;
-        g.parentNode.insertBefore(n, g)
     }
-}(window, document, "script", "<<URL / Path to at_0.2.11.js>>", "apptracker"));
+}(window, "apptracker"));
 </script>
+#### include convivaAppTracker.js as script tag.
+<script src= "<<URL / Path to convivaAppTracker.js>>"></script>
 ```
 #### Initialize the tracker
 Init the SDK with appId, customerKey and optional parameters. 
