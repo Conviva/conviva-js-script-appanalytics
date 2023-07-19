@@ -12,7 +12,7 @@ To use the application sensor, use convivaAppTracker.js file from this repositor
 
 #### Add the following script to the HTML head section of your website:
 ```js
-<script type="text/javascript" async>
+<script type="text/javascript">
 
 (function(p, i) {
     if (!p[i]) {
