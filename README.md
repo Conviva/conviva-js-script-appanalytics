@@ -40,7 +40,7 @@ window.apptracker('convivaAppTracker',  {
     appId: 'YOUR_APP_NAME_AS_STRING',
     convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY',
     contexts: {
-        performanceTiming: true,
+        performanceTiming: true
     },
 });
 ```    
@@ -112,4 +112,4 @@ let customTagsToUnset = ['tagKey2', 'tagKey3'];
 window.apptracker('unsetCustomTags' customTagsToUnset);
 
 ```
-#### Note:- If your web applicationn has multiple html pages than above complete instructions have to follow for each html page.
+#### Note:- To integrate Conviva App Experience with web applications having multiple HTML pages, add the aforementioned instructions to each HTML page. 
