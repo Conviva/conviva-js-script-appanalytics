@@ -80,11 +80,15 @@ Use trackCustomEvent() API to track all kinds of events. This API provides 2 fie
 
 name - Name of the custom event. (Mandatory)
 
-data - Any type of data in string format.
+data - Any type of data.
 
-The following example shows the implementation of the 'onClick' event listener to any element.
+The following example shows the data in JSON format.
 ```js
-let custom_data = "{\"identifier1\": \"test\",\"identifier2\": 1,\"identifier3\":true}"
+let custom_data = {
+                    "identifier1": "test",
+                    "identifier2": 1,
+                    "identifier3":true
+                  };
 
 window.apptracker('trackCustomEvent', {
     name: "custom_event_name",
