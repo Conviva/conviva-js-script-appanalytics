@@ -116,4 +116,11 @@ let customTagsToUnset = ['tagKey2', 'tagKey3'];
 window.apptracker('unsetCustomTags' customTagsToUnset);
 
 ```
+#### Conviva Video Events to App Insight
+We need minimum of the Video Sensor Core SDK Version of 4.5.13 to be in a stage to delegate the events:
+
+[v4.5.13](https://github.com/Conviva/conviva-js-coresdk/releases/tag/v4.5.13)
+
+4.5.13 (27/DEC/2022)
+    - Supports broadcasting video events to Conviva App Insights SDKs to consume. For non App Insights users, there is no impact.
 #### Note:- To integrate Conviva App Experience with web applications having multiple HTML pages, add the aforementioned instructions to each HTML page. 
