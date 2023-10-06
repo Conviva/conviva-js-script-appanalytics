@@ -1,10 +1,10 @@
 
 # Changelog
 ## 0.3.32 (06/OCT/2023)
-* Updated default blocklist for Network Request Tracking.
-* Handling failure case in fetch type Network Request Tracking.
-* Fixed issue of target url being reported with only relative path in case of xmlHttpRequest Request is made with relative path by adding `window.location.domain` to the relative path.
-* Fixed issue of Custom Event not seen in pulse if event data is type object.
+* Enhances default blocklist for Network Request Tracking.
+* Fixes the issue of target url being reported with only relative path in case of xmlHttpRequest Request is made with relative path by appending `window.location.domain` to the relative path.
+* Supports the reportCustomEvent API with JSON Object as an argument.
+* Fixes issue of network request event not reported when fetch api’s promise is rejected.
 
 ## 0.3.29 (06/SEP/2023)
 * Optimised performance timing context.
