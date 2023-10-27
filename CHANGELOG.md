@@ -1,7 +1,7 @@
 
 # Changelog
 ## 0.4.3 (27/OCT/2023)
-* Support collection of specified fields from request-body, response-body, request-headers, response-headers from network request.
+* Enhances network requests & response collection feature to capture limited (json only, size limit 10kb) and controlled set of information from headers and body.
 
 ## 0.3.34 (19/OCT/2023)
 * Fixes issue in linkClickTracking & buttonClickTracking generating lots of console errors due to internal initialization sequence.
