@@ -132,7 +132,7 @@ This feature supports to track the Network Requests triggerred with in applicati
 <br> *Here are some of the granular details/limitations of the feature:*
 * *Response and Request Body atributes are collected only when the:*
     * *size is < 10kb and the content-length is available* 
-    * *content-type is "json", "text/plain", "text/javascript" or "application/javascript"*
+    * *response body is type josn and content-type is "json", "text/plain", "text/javascript" or "application/javascript"*
 * *Response and Request Headers are collected only when the:*
     * *server is provisioned with "Access-Control-Expose-Headers:*"* 
 
@@ -172,8 +172,8 @@ Structure of metaTagsTracking config
           "tags":
             [
               {
-                "key": "name", //mandatory //here key sepcifies the attributes tag
-                "value": "content", //mandatory //value specifies the value tag
+                "key": "name", //mandatory //here key sepcifies what attributes tag to collect
+                "value": "content", //mandatory //value specifies the value .
               },
               {
                 "key": "property",
