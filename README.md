@@ -124,9 +124,8 @@ let customTagsToUnset = ['tagKey2', 'tagKey3'];
 window.apptracker('unsetCustomTags' customTagsToUnset);
 
 ```
-<details>
-  <summary><b>AutoCollection of Network Request made using XMLHttpRequest and fetch api</b></summary>
-## AutoCollection of Network Request made using XMLHttpRequest and fetch api
+
+#### AutoCollection of Network Request made using XMLHttpRequest and fetch api
 This feature supports to track the Network Requests triggerred with in application using XMLHttpRequest and fetch api
 *Note: This collection is disabled by default, reach out to Conviva Team enabling the tracking.* <br>
 
@@ -136,12 +135,10 @@ This feature supports to track the Network Requests triggerred with in applicati
     * *content-type is "json", "text/plain", "text/javascript" or "application/javascript"*
 * *Response and Request Headers are collected only when the:*
     * *server is provisioned with "Access-Control-Expose-Headers:*"* 
-</details>
 
 
-<details>
-  <summary><b>AutoCollection of Meta tags from HEAD section of HTML page.</b></summary>
-## AutoCollection of Meta tags from HEAD section of HTML page
+
+#### AutoCollection of Meta tags from HEAD section of HTML page
 This feature supports to track the Meta tags from HEAD section of HTML page based on the config provided.
 # metaTagsTracking is the config to collect Meta tags and can be provided as part of tracker Initialization under configs field.
 
@@ -164,26 +161,7 @@ Structure of metaTagsTracking config
 </HTML>
 
 //Example config to collect all name attributes and it's value and few certain property attributes and it's value.
- metaTagsTracking: {
-          "tags":
-            [
-              {
-                "key": "name", //mandatory //here key sepcifies the attributes tag
-                "value": "content", //mandatory //value specifies the value tag
-              },
-              {
-                "key": "property",
-                "value": "content",
-                "condition": ["title", "locale"] // optional //value of attributes placed in key to collect 
-              },
-              ...
-            ]
-        }
-
-```
-The following example shows the implemenatation of metaTagsTracking.
-```js
-window.apptracker('convivaAppTracker',  {
+ window.apptracker('convivaAppTracker',  {
     appId: 'YOUR_APP_NAME_AS_STRING',
     convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY',
     contexts: {
@@ -209,7 +187,7 @@ window.apptracker('convivaAppTracker',  {
 });
 
 ```
-</details>
+
 
 
 #### Note:- To integrate Conviva App Experience with web applications having multiple HTML pages, add the aforementioned instructions to each HTML page. 
