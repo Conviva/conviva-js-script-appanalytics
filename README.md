@@ -125,7 +125,7 @@ window.apptracker('unsetCustomTags' customTagsToUnset);
 
 ```
 
-#### AutoCollection of Network Request made using XMLHttpRequest and fetch api
+## AutoCollection of Network Request made using XMLHttpRequest and fetch api
 This feature supports to track the Network Requests triggerred with in application using XMLHttpRequest and fetch api
 *Note: This collection is disabled by default, reach out to Conviva Team enabling the tracking.* <br>
 
@@ -138,9 +138,9 @@ This feature supports to track the Network Requests triggerred with in applicati
 
 
 
-#### AutoCollection of Meta tags from HEAD section of HTML page
+## AutoCollection of Meta tags from HEAD section of HTML page
 This feature supports to track the Meta tags from HEAD section of HTML page based on the config provided.
-# metaTagsTracking is the config to collect Meta tags and can be provided as part of tracker Initialization under configs field.
+#### metaTagsTracking is the config to collect Meta tags and can be provided as part of tracker Initialization under configs field.
 
 Structure of metaTagsTracking config 
 ```js
