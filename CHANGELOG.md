@@ -1,7 +1,13 @@
 
 # Changelog
+## 0.4.8 (24/JAN/2024)
+* Added capability of autotracking meta tags present inside HEAD section of HTML page based on keys provided as config.
+* Added functionality for app to report appVersion as part of init config.
+* Enhances network requests & response collection feature to support collection of response and request body where content-type is `text/javascript`, `application/javascript` along with already supported `text/plain` and `application/json`.
+* Fixes issue of setting page information in events by sending this data along with trackPageView.
+
 ## 0.4.6 (05/JAN/2024)
-* Added remote-config control in button and link click tracking custom api .
+* Added remote-config control in button and link click tracking custom api.
 
 ## 0.4.5 (02/JAN/2024)
 * Fixes issue of reporting incorrect app video bounce rate metric because conviva video event being dropped when video session id is negative.
