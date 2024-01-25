@@ -34,11 +34,13 @@ Below 2 arguments are passed to function one is the global scope in which your a
 Init the SDK with appId, customerKey and optional parameters. 
 - appId: set this to your understandable application name, reflecting the platform and brand of your app. As an example: "WEB App", "LGTV Web App".
 - convivaCustomerKey: the unique string identifier for your Conviva account. Provided by Conviva / can be obtained in the Conviva Pulse dashboard. 
+- appVersion: set app version in string format.
 
 ```js
 window.apptracker('convivaAppTracker',  {
     appId: 'YOUR_APP_NAME_AS_STRING',
     convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY',
+    appVersion: "1.1.0",
     contexts: {
         performanceTiming: true
     },
@@ -51,8 +53,10 @@ window.apptracker('setUserId','replace_me_by_the_userId');
 ```
 
 #### Report Page View for tracking in-app page navigations.
+By default document.title is set as page title but you can also pass custom page title details in trackPageView.
 ```js
-window.apptracker('trackPageView');
+window.apptracker('trackPageView'); // default page title is document.title
+window.apptracker('trackPageView', {"title": "Custom Page Title"});
 ```
 
 #### Enable autocollection
@@ -164,6 +168,7 @@ Structure of metaTagsTracking config
  window.apptracker('convivaAppTracker',  {
     appId: 'YOUR_APP_NAME_AS_STRING',
     convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY',
+    appVersion: "1.1.0",
     contexts: {
         performanceTiming: true
     },
