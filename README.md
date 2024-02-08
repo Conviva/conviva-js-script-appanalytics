@@ -112,3 +112,28 @@ let customTagsToUnset = ['tagKey2', 'tagKey3'];
 window.apptracker('unsetCustomTags' customTagsToUnset);
 
 ```
+
+## Auto Ingestion of "traceparent" header to network requests
+This feature supports to ingest "traceparent" header into network requests based on the config provided. 
+
+Structure of traceparentGeneration config
+```js
+//Example config to generate.
+window.apptracker("convivaAppTracker", {
+  appId: 'YOUR_APP_NAME_AS_STRING',
+  convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY',
+  appVersion: "1.1.0",
+  contexts: {
+      performanceTiming: true
+  },
+  plugins: [ PerformanceTimingPlugin(), ErrorTrackingPlugin(), LinkClickTrackingPlugin()],
+  configs:{
+        configs: {
+          traceparentGeneration: {
+            force: true, // optional (default false), forces the below settings to take effect disregarding remote configuration
+            enabled: true, // optional (default true), enables traceparent generation for below target URLs
+            targetUrl: ["auth", "signup"] // Mandatory, Mention all the target URL substrings that need "traceparent" to be generated
+          }
+    }
+});
+```
