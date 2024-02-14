@@ -195,7 +195,7 @@ Structure of metaTagsTracking config
 
 ## Auto Ingestion of "traceparent" header to network requests
 This feature supports to ingest "traceparent" header into network requests based on the config provided. 
-Note: This collection is disabled by default, reach out to Conviva Team enabling the tracking.
+Note: This ingestion is disabled by default, reach out to Conviva Team enabling the tracking.
 
 
 #### Note:- To integrate Conviva App Experience with web applications having multiple HTML pages, add the aforementioned instructions to each HTML page. 
