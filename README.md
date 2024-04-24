@@ -45,7 +45,9 @@ window.apptracker('convivaAppTracker',  {
         performanceTiming: true
     },
 });
-```    
+```
+
+Note:- Eco Sensor utilises localstorage to cache some data.
 #### Set the user id (viewer id)
 ```js
 // Set this after initializing the tracker and before autocollection
@@ -106,7 +108,8 @@ We need minimum of the Video Sensor Core SDK Version of 4.5.13 to be in a stage 
 [v4.5.13](https://github.com/Conviva/conviva-js-coresdk/releases/tag/v4.5.13)
 
 4.5.13 (27/DEC/2022)
-    - Supports broadcasting video events to Conviva App Insights SDKs to consume. For non App Insights users, there is no impact.
+    - Supports broadcasting video events to Conviva Eco SDKs to consume. For non App Insights users, there is no impact.
+    - We only send following fields from video events into Eco events (name, sid, iid, clid, st, cen, ced, an).
 
 ## Setting / Unsetting Custom tags to report your application specific data.
 Use setCustomTags() API to set all kinds of tags (key value pairs). This API provides 1 argument that accepts data in JSON Format to describe the tags.
@@ -196,6 +199,27 @@ Structure of metaTagsTracking config
 ## Auto Ingestion of "traceparent" header to network requests
 This feature supports to ingest "traceparent" header into network requests based on the config provided. 
 Note: This ingestion is disabled by default, reach out to Conviva Team enabling the tracking.
+
+<details>
+    <summary><b>Auto-collected Events</b></summary>
+
+
+##### Conviva provides a rich set of application performance metrics with the help of autocollected app events, such as _button_click_, and _network_request_.
+
+Event | Occurrence | Notes |
+------|------------|-------|
+network_request | after receiving the network request response | only supports xmlHttpRequest/fetch|
+page_ping | Max X and Y scroll positions difference comparing to the last event|
+application_error | when an error occurrs in the application|
+button_click | on the button click callback| only if element is type button or button tag \n preventDefault and stopPropagation prevents to auto collect these events|
+link_click | on the link click callback|only if element is anchor tag \n preventDefault and stopPropagation prevents to auto collect these events|
+application_background | when visibility state change to `hidden`|
+application_foreground | when visibility state change to `visible`|
+Largest Contentful Paint| timing information about the largest image or text paint before user input on a web page| Context|
+First App Launch| First time launch in the browser|Custom Tag Context|
+
+To learn about the default metrics for analyzing the native and web applications performance, such as App Crashes, Avg Screen Load Time, and Page Loads, refer to the [ECO Metrics](https://pulse.conviva.com/learning-center/content/eco/eco_metrics.html) page in the Learning Center.
+</details>
 
 
 #### Note:- To integrate Conviva App Experience with web applications having multiple HTML pages, add the aforementioned instructions to each HTML page. 
