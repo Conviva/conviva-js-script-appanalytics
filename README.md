@@ -47,7 +47,7 @@ window.apptracker('convivaAppTracker',  {
 });
 ```
 
-####Note:- Eco Sensor utilises localstorage to cache some data.
+#### Note:- Eco Sensor utilises localstorage to cache some data.
 #### Set the user id (viewer id)
 ```js
 // Set this after initializing the tracker and before autocollection
