@@ -207,35 +207,14 @@ Structure of metaTagsTracking config
 This feature supports to ingest "traceparent" header into network requests based on the config provided. 
 Note: This ingestion is disabled by default, reach out to Conviva Team enabling the tracking.
 
-<details>
-    <summary><b>Auto-collected Events</b></summary>
-
-
-##### Conviva provides a rich set of application performance metrics with the help of autocollected app events, such as _button_click_, and _network_request_.
-
-Event | Occurrence | Notes |
-------|------------|-------|
-network_request | after receiving the network request response | only supports xmlHttpRequest/fetch|
-page_ping | Max X and Y scroll positions difference comparing to the last event|
-application_error | when an error occurrs in the application|
-button_click | on the button click callback| only if element is type button or button tag \n preventDefault and stopPropagation prevents to auto collect these events|
-link_click | on the link click callback|only if element is anchor tag \n preventDefault and stopPropagation prevents to auto collect these events|
-application_background | when visibility state change to `hidden`|
-application_foreground | when visibility state change to `visible`|
-Largest Contentful Paint| timing information about the largest image or text paint before user input on a web page| Context|
-First App Launch| First time launch in the browser|Custom Tag Context|
-
-To learn about the default metrics for analyzing the native and web applications performance, such as App Crashes, Avg Screen Load Time, and Page Loads, refer to the [ECO Metrics](https://pulse.conviva.com/learning-center/content/eco/eco_metrics.html) page in the Learning Center.
-</details>
-
-#### ECO Sensor API for setting Device Metadata from Application (for SDK’s)
+## ECO Sensor API for setting Device Metadata from Application (for SDK’s)
 deviceMetadata config key passed as part of app init config:
 
 deviceMetadata: An object containing the key-value pairs of pre-defined values for DeviceType and DeviceCategory types and other string values for Device Brand, Manufacture, and models
 <details>
     <summary><b>The table below provides the list of pre-defined metadata for device metadata:</b></summary>
 
-    | Key                       | Type                           | Description                                                                        | Example Values                                  |
+| Key                       | Type                           | Description                                                                        | Example Values                                  |
 |---------------------------|--------------------------------|------------------------------------------------------------------------------------|------------------------------------------------|
 | DeviceBrand               | string                         | Brand of the device                                                                | "Apple", "Samsung", "Huawei", "Google"          |
 | DeviceManufacturer        | string                         | Manufacturer of the device                                                         | "Samsung", "Apple", "HTC", "Sony"               |
@@ -246,9 +225,9 @@ deviceMetadata: An object containing the key-value pairs of pre-defined values f
 | OperatingSystemVersion    | string                         | Version of the operating system used by the device                                 | "10.10.1", "8.1", "T-INFOLINK2012-1012", "Fire OS 5" |
 | DeviceCategory            | Prescribed values of DeviceCategory | Device category to which the used device belongs. Only allows DeviceCategory values and discards any other string values | WEB, AND, PS (see table below)                  |
 | FrameworkName             | string                         | Application framework name                                                         | N/A                                             |
-| FrameworkVersion          | string                         | Application framework version                                                      | N/A                                             |
+| FrameworkVersion          | string                         | Application framework version                                                      | N/A                                             |                                          |
 
-##### DeviceCategory Pre-defined String Values:
+#### DeviceCategory Pre-defined String Values:
 
 | Value       | Description                                                                                                                                                                                                                                       |
 |-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -270,7 +249,7 @@ deviceMetadata: An object containing the key-value pairs of pre-defined values f
 | WIN         | The device is a Windows OS-based handheld device, like a Windows Phone or Windows Tablet.                                                                                                                 |
 | XB          | The device is an Xbox console, including Xbox 360 and Xbox One.                                                                                                                                            |
 
-##### DeviceType Pre-defined String Values:
+#### DeviceType Pre-defined String Values:
 
 | Value     | Description                                                   |
 |-----------|---------------------------------------------------------------|
@@ -283,7 +262,7 @@ deviceMetadata: An object containing the key-value pairs of pre-defined values f
 | Vehicle   | The device is a vehicle infotainment system.                  |
 | Other     | Other device types.                                           |
 
-Sample
+##### Sample
 
 ```js
     const deviceMetadata = {};
@@ -312,6 +291,27 @@ Sample
     });
 ```
 
+</details>
+
+<details>
+    <summary><b>Auto-collected Events</b></summary>
+
+
+##### Conviva provides a rich set of application performance metrics with the help of autocollected app events, such as _button_click_, and _network_request_.
+
+Event | Occurrence | Notes |
+------|------------|-------|
+network_request | after receiving the network request response | only supports xmlHttpRequest/fetch|
+page_ping | Max X and Y scroll positions difference comparing to the last event|
+application_error | when an error occurrs in the application|
+button_click | on the button click callback| only if element is type button or button tag \n preventDefault and stopPropagation prevents to auto collect these events|
+link_click | on the link click callback|only if element is anchor tag \n preventDefault and stopPropagation prevents to auto collect these events|
+application_background | when visibility state change to `hidden`|
+application_foreground | when visibility state change to `visible`|
+Largest Contentful Paint| timing information about the largest image or text paint before user input on a web page| Context|
+First App Launch| First time launch in the browser|Custom Tag Context|
+
+To learn about the default metrics for analyzing the native and web applications performance, such as App Crashes, Avg Screen Load Time, and Page Loads, refer to the [ECO Metrics](https://pulse.conviva.com/learning-center/content/eco/eco_metrics.html) page in the Learning Center.
 </details>
 
 
