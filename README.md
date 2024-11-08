@@ -207,6 +207,92 @@ Structure of metaTagsTracking config
 This feature supports to ingest "traceparent" header into network requests based on the config provided. 
 Note: This ingestion is disabled by default, reach out to Conviva Team enabling the tracking.
 
+## ECO Sensor API for setting Device Metadata from Application (for SDK’s)
+deviceMetadata config key passed as part of app init config:
+
+deviceMetadata: An object containing the key-value pairs of pre-defined values for DeviceType and DeviceCategory types and other string values for Device Brand, Manufacture, and models
+<details>
+    <summary><b>The table below provides the list of pre-defined metadata for device metadata:</b></summary>
+
+| Key                       | Type                           | Description                                                                        | Example Values                                  |
+|---------------------------|--------------------------------|------------------------------------------------------------------------------------|------------------------------------------------|
+| DeviceBrand               | string                         | Brand of the device                                                                | "Apple", "Samsung", "Huawei", "Google"          |
+| DeviceManufacturer        | string                         | Manufacturer of the device                                                         | "Samsung", "Apple", "HTC", "Sony"               |
+| DeviceModel               | string                         | Model of the device                                                                | "iPhone 6 Plus", "HTC One", "Roku 3"            |
+| DeviceType                | Prescribed values of DeviceType | Type of the device. Only allows the DeviceType values and discards any other string values | DESKTOP, Console, Mobile (see table below)     |
+| DeviceVersion             | string                         | Device firmware version                                                            | "10", "9"                                       |
+| OperatingSystemName       | string                         | Name of the operating system used by the device, in uppercase                      | "WINDOWS", "LINUX", "IOS", "MAC", "ANDROID", "FIREOS", "ROKU", "PLAYSTATION", "CHROMEOS" |
+| OperatingSystemVersion    | string                         | Version of the operating system used by the device                                 | "10.10.1", "8.1", "T-INFOLINK2012-1012", "Fire OS 5" |
+| DeviceCategory            | Prescribed values of DeviceCategory | Device category to which the used device belongs. Only allows DeviceCategory values and discards any other string values | WEB, AND, PS (see table below)                  |
+| FrameworkName             | string                         | Application framework name                                                         | N/A                                             |
+| FrameworkVersion          | string                         | Application framework version                                                      | N/A                                             |                                          |
+
+#### DeviceCategory Pre-defined String Values:
+
+| Value       | Description                                                                                                                                                                                                                                       |
+|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| AND         | The device is an Android device like Samsung Galaxy, Amazon Fire TV, Android TV, or Android Tablet.                                                                                                       |
+| APL         | The device is an Apple device like iPhone or Apple TV.                                                                                                                                                     |
+| CHR         | The device is a Google Chromecast STB or Android TV with built-in Chromecast.                                                                                                                             |
+| DSKAPP      | The device is a desktop computer (including notebooks) where video is played in an installed app, as opposed to a browser.                                                                                |
+| SIMULATOR   | The device is a simulated video session used for testing.                                                                                                                                                  |
+| KAIOS       | The device is a phone or other device based on KaiOS OS, such as the Lyf Jio F30C.                                                                                                                         |
+| LGTV        | The device is an LG smart TV, including NetCast and webOS.                                                                                                                                                 |
+| LNX         | This mostly covers various Set-Top Boxes and Smart TVs that use custom Linux-based SDKs.                                                                                                                   |
+| NINTENDO    | The device is a Nintendo games console, including Wii and Switch.                                                                                                                                          |
+| PS          | The device is a PlayStation console, including PS3 and PS4.                                                                                                                                                |
+| RK          | The device is a Roku device.                                                                                                                                                                               |
+| SAMSUNGTV   | The device is a Samsung Smart TV, including Orsay and Tizen.                                                                                                                                               |
+| VIDAA       | Vidaa-based devices, using an operating system developed by Hisense.                                                                                                                                       |
+| VIZIOTV     | Category for native app integrations on Vizio TVs using the SmartCast platform (from 2016 onwards).                                                                                                        |
+| WEB         | The device can be any device with an in-browser HTML5-based player. Video is played in the browser using HTML5 technology, in browsers like Chrome, Edge, Firefox, Internet Explorer, Opera, or Safari.     |
+| WIN         | The device is a Windows OS-based handheld device, like a Windows Phone or Windows Tablet.                                                                                                                 |
+| XB          | The device is an Xbox console, including Xbox 360 and Xbox One.                                                                                                                                            |
+
+#### DeviceType Pre-defined String Values:
+
+| Value     | Description                                                   |
+|-----------|---------------------------------------------------------------|
+| DESKTOP   | The device is a desktop or laptop computer.                   |
+| Console   | The device is a gaming console.                               |
+| Settop    | The device is a set-top box.                                  |
+| Mobile    | The device is a mobile phone.                                 |
+| Tablet    | The device is a tablet.                                       |
+| SmartTV   | The device is a smart TV.                                     |
+| Vehicle   | The device is a vehicle infotainment system.                  |
+| Other     | Other device types.                                           |
+
+##### Sample
+
+```js
+    const deviceMetadata = {};
+    deviceMetadata['DeviceBrand'] = 'Apple';
+    deviceMetadata['DeviceManufacturer'] = 'Apple';
+    deviceMetadata['DeviceModel'] = 'MacBookPro';
+    deviceMetadata['DeviceType'] = 'Vehicle';
+    deviceMetadata['DeviceVersion'] = 'NAForMac';
+    deviceMetadata['OperatingSystemName'] = 'MAC';
+    deviceMetadata['OperatingSystemVersion'] = '10.13.6';
+    deviceMetadata['DeviceCategory'] = 'LNX';
+    deviceMetadata['FrameworkName'] = 'Web';
+    deviceMetadata['FrameworkVersion'] = '1.0.0';
+
+  
+    // Initialize app tracker by passing appId, customerKey and tracker configuration URL. By default xhrtracking is disabled. To enable, configure it to true in configuration argument
+    tracker('convivaAppTracker', {
+      appId: 'JS-App-Sensor-Test-App-v1',
+      appVersion:'19.2.0-rc',
+      convivaCustomerKey: '4d2f03dddf417990f520f09d79b11ab014c39dab',
+      deviceMetadata: deviceMetadata,
+      contexts: {
+        performanceTiming: true,
+        session: true
+      }
+    });
+```
+
+</details>
+
 <details>
     <summary><b>Auto-collected Events</b></summary>
 
@@ -227,6 +313,7 @@ First App Launch| First time launch in the browser|Custom Tag Context|
 
 To learn about the default metrics for analyzing the native and web applications performance, such as App Crashes, Avg Screen Load Time, and Page Loads, refer to the [ECO Metrics](https://pulse.conviva.com/learning-center/content/eco/eco_metrics.html) page in the Learning Center.
 </details>
+
 
 
 #### Note:- To integrate Conviva App Experience with web applications having multiple HTML pages, add the aforementioned instructions to each HTML page. 
