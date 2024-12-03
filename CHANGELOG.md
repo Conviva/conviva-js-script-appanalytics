@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 0.7.8 (03/DEC/2024)
+* Supports Controlled Ingestion Feature which is disabled by default. Upgrading to this version will not change the collection behavior unless it is enabled. To enable this feature, please contact Conviva support team.
+* Supports sending Diagnostic Info Events which is disabled by default.
+
 ## 0.6.16 (08/NOV/2024)
 * Introduces “deviceMetadata” key inside ConvivaAppTracker Initialisation config to set additional device related information. Please refer to [Device Metadata feature](https://github.com/Conviva/conviva-js-script-appanalytics?tab=readme-ov-file#eco-sensor-api-for-setting-device-metadata-from-application-for-sdks) for more details.
 * Introduces Event Batching Feature with configurable payload size and interval caps, immediate dispatch for urgent events, remote configuration, and fixed limits from Activation
