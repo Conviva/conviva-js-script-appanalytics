@@ -17,8 +17,8 @@ Below 2 arguments are passed to function one is the global scope in which your a
 
 (function(p, i) {
     if (!p[i]) {
-        p.GlobalSnowplowNamespace = p.GlobalSnowplowNamespace || [];
-        p.GlobalSnowplowNamespace.push(i);
+        p.GlobalConvivaNamespace = p.GlobalConvivaNamespace || [];
+        p.GlobalConvivaNamespace.push(i);
         p[i] = function() {
             (p[i].q = p[i].q || []).push(arguments)
         };
@@ -40,10 +40,7 @@ Init the SDK with appId, customerKey and optional parameters.
 window.apptracker('convivaAppTracker',  {
     appId: 'YOUR_APP_NAME_AS_STRING',
     convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY',
-    appVersion: "1.1.0",
-    contexts: {
-        performanceTiming: true
-    },
+    appVersion: "1.1.0"
 });
 ```
 
@@ -62,15 +59,7 @@ window.apptracker('trackPageView', {"title": "Custom Page Title"});
 ```
 
 #### Enable autocollection
-```js
-window.apptracker('enableLinkClickTracking');
-window.apptracker('enableButtonClickTracking');
-```
-#### Enable Error Tracking
-To enable automatic tracking of run-time exceptions in the application, use the following API:
-```js
-window.apptracker('enableErrorTracking');
-```
+
 Alternatively, you could report exceptions manually using the following API:
 
 ```js

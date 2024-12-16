@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 1.0.3 (16/DEC/2024)
+* Simplifies integration steps by consuming enableLinkClickTracking, enableButtonClickTracking & enableErrorTracking APIs into initialization sequence. 
+* Refactored & restructured internal dependencies that improves size and performance of the library.
+
 ## 0.7.8 (03/DEC/2024)
 * Supports Controlled Ingestion Feature which is disabled by default. Upgrading to this version will not change the collection behavior unless it is enabled. To enable this feature, please contact Conviva support team.
 * Supports sending Diagnostic Info Events which is disabled by default.
