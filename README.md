@@ -1,6 +1,6 @@
 # conviva-js-script-appanalytics
-## Application Analytics for Conviva JavaScript Sensor
-Use Application Analytics to autocollect events, track application specific events and state changes, and track users anonymously.
+## Conviva JavaScript ECO Sensor
+Use Conviva ECO Sensor to autocollect events, track application specific events and state changes, and track users anonymously.
 
 ## Usage
 To use the video sensor, download the Core JavaScript SDK file (version 4.5.6 or above) from Conviva JavaScript Sensor Integration and unzip the downloaded file.
@@ -59,6 +59,7 @@ window.apptracker('trackPageView', {"title": "Custom Page Title"});
 ```
 
 #### Enable autocollection
+Auto collection for Errors, Link clicks and button clicks is enabled by default.
 
 Alternatively, you could report exceptions manually using the following API:
 
@@ -69,6 +70,8 @@ window.apptracker('trackError', {
     error: exceptionObj //Exception object containing properties describing the exception.
 });
 ```
+
+Note: APIs for enabling error, link clicks, button clicks tracking are removed from version v1.0.3. They are consumed into initialization sequence.
 
 #### Custom event tracking to track your application specific events and state changes
 Use trackCustomEvent() API to track all kinds of events. This API provides 2 fields to describe the tracked events.
@@ -125,7 +128,6 @@ The following example shows the implementation of unset or remove custom tags.
 ```js
 let customTagsToUnset = ['tagKey2', 'tagKey3'];
 window.apptracker('unsetCustomTags' customTagsToUnset);
-
 ```
 
 ## AutoCollection of Network Request made using XMLHttpRequest and fetch api

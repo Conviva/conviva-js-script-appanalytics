@@ -2,6 +2,7 @@
 # Changelog
 
 ## 1.0.3 (16/DEC/2024)
+* Introduces "cleanup" API to comprehensively remove Conviva from the application footprint.
 * Simplifies integration steps by consuming enableLinkClickTracking, enableButtonClickTracking & enableErrorTracking APIs into initialization sequence. 
 * Refactored & restructured internal dependencies that improves size and performance of the library.
 
