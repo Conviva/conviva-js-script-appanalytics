@@ -47,6 +47,33 @@ window.apptracker('convivaAppTracker',  {
 ```
 
 #### Note:- Eco Sensor utilises localstorage to cache some data.
+#### Client ID Synchronization
+- Mobile App to WebView Synchronization
+- Cross-Subdomain Client ID Synchronization
+
+When integrating multiple Conviva ECO Sensor instances across different environments (e.g., subdomains of a single customer, mobile apps opening webviews), clientId may not be shared automatically. To maintain consistency, the sensor provides getClientId and setClientId APIs to manually synchronize clientId between instances.
+##### getClientId()
+Retrieves the current clientId from an already initialized sensor instance.
+```js
+// Always call getClientId() after convivaAppTracker()
+convivaAppTracker({
+  appId: 'YOUR_APP_NAME_AS_STRING',
+  convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY'
+});
+clientId = getClientId();
+```
+
+##### setClientId(clientId)
+Sets a specific clientId before initializing the SDK.
+
+```js
+// Always call setClientId() before convivaAppTracker()
+setClientId(clientId);
+convivaAppTracker({
+  appId: 'YOUR_APP_NAME_AS_STRING',
+  convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY'
+});
+```
 #### Set the user id (viewer id)
 ```js
 // Set this after initializing the tracker and before autocollection
