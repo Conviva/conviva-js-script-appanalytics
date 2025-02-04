@@ -56,11 +56,12 @@ When integrating multiple Conviva ECO Sensor instances across different environm
 Retrieves the current clientId from an already initialized sensor instance.
 ```js
 // Always call getClientId() after convivaAppTracker()
-convivaAppTracker({
-  appId: 'YOUR_APP_NAME_AS_STRING',
-  convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY'
+window.apptracker('convivaAppTracker',  {
+    appId: 'YOUR_APP_NAME_AS_STRING',
+    convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY',
+    appVersion: "1.1.0"
 });
-clientId = getClientId();
+clientId = window.apptracker('getClientId');
 ```
 
 ##### setClientId(clientId)
@@ -68,10 +69,11 @@ Sets a specific clientId before initializing the SDK.
 
 ```js
 // Always call setClientId() before convivaAppTracker()
-setClientId(clientId);
-convivaAppTracker({
-  appId: 'YOUR_APP_NAME_AS_STRING',
-  convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY'
+window.apptracker('setClientId', clientId);
+window.apptracker('convivaAppTracker',  {
+    appId: 'YOUR_APP_NAME_AS_STRING',
+    convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY',
+    appVersion: "1.1.0"
 });
 ```
 #### Set the user id (viewer id)
