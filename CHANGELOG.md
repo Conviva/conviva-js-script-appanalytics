@@ -1,7 +1,7 @@
 
 # Changelog
 
-## 1.1.2 (04/FEB/2025)
+## 1.1.2 (18/FEB/2025)
 * Enhances collection of clicks to capture all kinds of elements automatically and currently supports standard html elements, elements created using reactjs, angular and vue frameworks. Read more: [Autocollection of Clicks] (https://github.com/Conviva/conviva-js-script-appanalytics?tab=readme-ov-file#autocollection-of-clicks)
 
 ## 1.1.1 (04/FEB/2025)
