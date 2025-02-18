@@ -109,7 +109,7 @@ We additionally have an experimental remote config specifically for clicks to at
 
 ##### Migration of Pulse dimensions for clicks
 Starting from v1.1.2 of sensor, the keys for click attributes have changed. Kindly update your event / metric mappings on pulse if any of following attributes are used in mapping:
-|--------------------------------|--------------------------------|
+
 | <=v1.1.1                       | >=v1.1.2                       |
 |--------------------------------|--------------------------------|
 | elementType                    | elementType                    |
@@ -118,7 +118,6 @@ Starting from v1.1.2 of sensor, the keys for click attributes have changed. Kind
 | elementValue                   | value                          |
 | elementId                      | id                             |
 | elementClasses                 | class                          |
-|--------------------------------|--------------------------------|
 
 ##### Note: APIs for enabling error, link clicks, button clicks tracking are removed from version v1.0.3. They are consumed into initialization sequence.
 
