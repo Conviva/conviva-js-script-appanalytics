@@ -472,6 +472,11 @@ This feature supports to track the Network Requests triggerred with in applicati
 
 </details>
 
+<details>
+  <summary><b>Clean up</summary>
+"cleanup" api support is not available in older browsers(Chrome: < 66, Mozila: < 57, Safari: < 12.1)
+</details>
+
 #### Note:- To integrate Conviva App Experience with web applications having multiple HTML pages, add the aforementioned instructions to each HTML page. 
 
 
