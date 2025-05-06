@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 1.1.8 (06/MAY/2025)
+* Supports limiting of burst in reporting errors
+* Fixes issue in collecting link clicks in multi-page applications.
+
 ## 1.1.6 (04/APR/2025)
 * Supports integration with Conviva Visual Labeling extension
 * Enhances network request tracking to handle relative URLs
