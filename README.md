@@ -46,14 +46,14 @@ Init the SDK with appId, customerKey and optional parameters.
 window.apptracker('convivaAppTracker',  {
     appId: 'YOUR_APP_NAME',
     convivaCustomerKey: 'YOUR_CUSTOMER_KEY',
-    appVersion: "plugin_version"
+    appVersion: "1.1.0"
 });
 ```
 **YOUR_APP_NAME** - A string value that uniquely identifies your app across platforms. For example: `"WEB App"`, `"LGTV App"`.
 
 **YOUR_CUSTOMER_KEY** - A string to identify a specific customer account. Use different keys for dev and prod. Find them in [Pulse](https://pulse.conviva.com/app/profile/applications) under My Profile (_Conviva login required_). 
 
-**plugin_version** - Set app version in string format.
+**appVersion** - Set app version in string format.
 
 #### Set the user id (viewer id)
 ```js
