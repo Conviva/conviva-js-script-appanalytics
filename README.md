@@ -11,6 +11,7 @@ Use Conviva JavaScript ECO SDK to auto-collect events and track application-spec
 ## Quick Start
 
 ### 1. Installation
+<!--self-serve[Manual]-->
 #### Add the following script to the HTML head section of your website:
 Below 2 arguments are passed to function one is the global scope in which your app is loaded and other is the namespace by which you want to referr the app tracker.
 ```js
@@ -31,6 +32,7 @@ Below 2 arguments are passed to function one is the global scope in which your a
 #### include convivaAppTracker.js as script tag.
 <script src= "<<URL / Path to convivaAppTracker.js>>"></script>
 ```
+<!--eof-self-serve--> 
 ### 2. Initialization
 
  Initialize the tracker as early as possible during the DOM load sequence.
@@ -42,16 +44,16 @@ Init the SDK with appId, customerKey and optional parameters.
 
 ```js
 window.apptracker('convivaAppTracker',  {
-    appId: 'YOUR_APP_NAME_AS_STRING',
-    convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY',
-    appVersion: "1.1.0"
+    appId: 'YOUR_APP_NAME',
+    convivaCustomerKey: 'YOUR_CUSTOMER_KEY',
+    appVersion: "plugin_version"
 });
 ```
-**appId** - A string value that uniquely identifies your app across platforms. For example: `"WEB App"`, `"LGTV App"`.
+**YOUR_APP_NAME** - A string value that uniquely identifies your app across platforms. For example: `"WEB App"`, `"LGTV App"`.
 
-**convivaCustomerKey** - A string to identify a specific customer account. Use different keys for dev and prod. Find them in [Pulse](https://pulse.conviva.com/app/profile/applications) under My Profile (_Conviva login required_). 
+**YOUR_CUSTOMER_KEY** - A string to identify a specific customer account. Use different keys for dev and prod. Find them in [Pulse](https://pulse.conviva.com/app/profile/applications) under My Profile (_Conviva login required_). 
 
-**appVersion** - Set app version in string format.
+**plugin_version** - Set app version in string format.
 
 #### Set the user id (viewer id)
 ```js
@@ -71,6 +73,7 @@ window.apptracker('trackPageView', {"title": "Custom Page Title"});
 ## More Features
 
 <details>
+<!--self-serve-custom-event-->
 <summary><b>Track Custom Event</b></summary>
     
 Use trackCustomEvent() API to track all kinds of events. This API provides 2 fields to describe the tracked events.
@@ -92,9 +95,11 @@ window.apptracker('trackCustomEvent', {
     data: custom_data
 });
 ```
+<!--eof-self-serve-custom-event-->
 </details>
 
 <details>
+<!--self-serve-custom-event-->
 <summary><b>Set Custom Tags</b></summary>
 
 Custom Tags are global tags applied to all events and persist throughout the application lifespan, or until they are removed.
@@ -117,7 +122,7 @@ The following example shows the implementation of unset or remove custom tags.
 let customTagsToUnset = ['tagKey2', 'tagKey3'];
 window.apptracker('unsetCustomTags' customTagsToUnset);
 ```
-
+<!--eof-self-serve-custom-event-->
 </details>
 
 <details>
