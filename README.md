@@ -417,7 +417,7 @@ This feature supports tracking network requests triggered within the application
   Collected only when:
   - Size is < 10KB.
   - Response body is type JSON.
-  - Content-type is `"json"`, `"text/plain"`, `"text/javascript"` or `"application/javascript"`.
+  - Content-type contains `"json"` or equals any of `"text/plain"`, `"text/javascript"`, `"application/javascript"`, `"text/html"`
 
  **Request and Response Header Collection:**
 
