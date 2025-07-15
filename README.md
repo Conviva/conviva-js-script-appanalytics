@@ -56,6 +56,8 @@ window.apptracker('convivaAppTracker',  {
 **appVersion** - Set app version in string format.
 
 #### Set the user id (viewer id)
+User ID is a unique string identifier to distinguish individual viewers. If using Conviva Video Sensor, match it with the Viewer ID. Note: Set the User ID as soon as Conviva sensor is initialized so that none of the events are missed from User's timeline.
+
 ```js
 // Set this after initializing the tracker and before autocollection
 window.apptracker('setUserId','replace_me_by_the_userId');
