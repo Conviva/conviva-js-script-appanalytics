@@ -1,6 +1,9 @@
 
 # Changelog
 
+## 1.1.16 (29/JUL/2025)
+* Enhanced XMLHttpRequest interception to improve performance
+
 ## 1.1.15 (16/JUL/2025)
 * Supports persisting custom selectors after page refresh
 
