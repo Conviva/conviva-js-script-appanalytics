@@ -496,6 +496,8 @@ This feature supports to track the Network Requests triggerred with in applicati
 
 #### Note:- To integrate Conviva App Experience with web applications having multiple HTML pages, add the aforementioned instructions to each HTML page. 
 
+## Validation
+After steps 1–4, verify auto-collected events in the validation dashboard . (Conviva login required)
 
 ## FAQ
 
