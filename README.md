@@ -239,9 +239,6 @@ Structure of metaTagsTracking config
     appId: 'YOUR_APP_NAME_AS_STRING',
     convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY',
     appVersion: "1.1.0",
-    contexts: {
-        performanceTiming: true
-    },
     configs:{
         metaTagsTracking: {
           "tags":
@@ -294,11 +291,7 @@ Conviva automatically collects deviceMetadata for Web apps and mobile browsers. 
       appId: 'JS-App-Sensor-Test-App-v1',
       appVersion:'19.2.0-rc',
       convivaCustomerKey: '4d2f03dddf417990f520f09d79b11ab014c39dab',
-      deviceMetadata: deviceMetadata,
-      contexts: {
-        performanceTiming: true,
-        session: true
-      }
+      deviceMetadata: deviceMetadata,      
     });
 ```
 
@@ -367,18 +360,18 @@ Conviva automatically collects rich set of app performance metrics through app e
   <summary><b>Auto-collected events table</b></summary>
 
 
-Event | Occurrence | Notes |
-------|------------|-------|
-network_request | after receiving the network request response | only supports xmlHttpRequest/fetch|
-page_ping | Max X and Y scroll positions difference comparing to the last event|
-application_error | when an error occurrs in the application|
-button_click | on the button click callback| only if element is type button or button tag \n preventDefault and stopPropagation prevents to auto collect these events|
-link_click | on the link click callback|only if element is anchor tag \n preventDefault and stopPropagation prevents to auto collect these events|
-application_background | when visibility state change to `hidden`|
-application_foreground | when visibility state change to `visible`|
+Event                   | Occurrence | Notes |
+------------------------|------------|-------|
+network_request         | after receiving the network request response | only supports xmlHttpRequest/fetch|
+page_ping               | Max X and Y scroll positions difference comparing to the last event|
+application_error       | when an error occurrs in the application|
+button_click            | on the button click callback| only if element is type button or button tag \n preventDefault and stopPropagation prevents to auto collect these events|
+link_click              | on the link click callback|only if element is anchor tag \n preventDefault and stopPropagation prevents to auto collect these events|
+application_background  | when visibility state change to `hidden`|
+application_foreground  | when visibility state change to `visible`|
 Largest Contentful Paint| timing information about the largest image or text paint before user input on a web page| Context|
-First App Launch| First time launch in the browser|Custom Tag Context|
-page_loaded | On "load" event listener | Used to compute Page Loads, Avg Document Load Time, Avg DNS Lookup Time, Avg Document Response Time metrics.
+First App Launch        | First time launch in the browser|Custom Tag Context|
+page_loaded             | On "load" event listener | Used to compute Page Loads, Avg Document Load Time, Avg DNS Lookup Time, Avg Document Response Time metrics.
 
 To learn about the default metrics for analyzing the native and web applications performance, such as App Crashes, Avg Screen Load Time, and Page Loads, refer to the [ECO Metrics](https://pulse.conviva.com/learning-center/content/eco/eco_metrics.html) page in the Learning Center.
 
