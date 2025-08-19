@@ -501,7 +501,7 @@ This feature supports to track the Network Requests triggerred with in applicati
 
 <details>
   <summary><b>SSE and Websocket</summary>
-    **only supports json data**
+    Only supports json payload
 </details>
 
 #### Note:- To integrate Conviva App Experience with web applications having multiple HTML pages, add the aforementioned instructions to each HTML page. 
