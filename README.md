@@ -191,6 +191,25 @@ window.apptracker('convivaAppTracker',  {
 });
 ```
 
+**Auto sync Client ID using cookie**
+
+Syncs clientId within subdomains by storing it in cookie with key name `Conviva_sdkConfig`.
+
+***Configure sharing clientId using cookie***
+
+To share clientId using cookie, you need to set the `enableClIdInCookies` configuration as true during SDK initialization.
+
+```js
+window.apptracker('convivaAppTracker',  {
+    appId: 'YOUR_APP_NAME_AS_STRING',
+    convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY',
+    appVersion: "1.1.0",
+    configs:{
+        enableClIdInCookies: true
+    }
+});
+```
+
 </details>
 
 <details>
@@ -214,11 +233,15 @@ Example meta tags in an HTML Page:
     </head>
 </html>
 ```
-**Configure Meta Tags Tracking**
+<details>
+<summary><b>Meta Tags Collection </b></summary>
 
-Structure of metaTagsTracking config 
+This feature enables tracking of meta tags from the `<head>` section of an HTML page based on the provided configuration.
+
+Example meta tags in an HTML Page:
+
 ```js
-//for below meta tags
+
 <HTML>
     <HEAD>
     <meta name="keywords" content="HTML, CSS, JavaScript">
@@ -233,8 +256,15 @@ Structure of metaTagsTracking config
     <meta property="type" content="video">
     </HEAD>
 </HTML>
+```
 
-//Example config to collect all name attributes and it's value and few certain property attributes and it's value.
+**Configure Meta Tags Tracking**
+
+To collect meta tag data, you need to define the `metaTagsTracking` configuration during SDK initialization.
+
+Example Configuration:
+
+```js
  window.apptracker('convivaAppTracker',  {
     appId: 'YOUR_APP_NAME_AS_STRING',
     convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY',
@@ -372,6 +402,8 @@ application_foreground  | when visibility state change to `visible`|
 Largest Contentful Paint| timing information about the largest image or text paint before user input on a web page| Context|
 First App Launch        | First time launch in the browser|Custom Tag Context|
 page_loaded             | On "load" event listener | Used to compute Page Loads, Avg Document Load Time, Avg DNS Lookup Time, Avg Document Response Time metrics.
+| Server-Sent Events | Supports Server-Sent Event (SSE) via Fetch eventstream. |
+| WebSocket message stream | When WebSocket events occur (open, close, send, receive, error) for real-time communication tracking. |
 
 To learn about the default metrics for analyzing the native and web applications performance, such as App Crashes, Avg Screen Load Time, and Page Loads, refer to the [ECO Metrics](https://pulse.conviva.com/learning-center/content/eco/eco_metrics.html) page in the Learning Center.
 
@@ -485,6 +517,11 @@ This feature supports to track the Network Requests triggerred with in applicati
 <details>
   <summary><b>Clean up</summary>
 "cleanup" api support is not available in older browsers(Chrome: < 66, Mozila: < 57, Safari: < 12.1)
+</details>
+
+<details>
+  <summary><b>SSE and Websocket</summary>
+    **only supports json data**
 </details>
 
 #### Note:- To integrate Conviva App Experience with web applications having multiple HTML pages, add the aforementioned instructions to each HTML page. 
