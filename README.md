@@ -212,27 +212,7 @@ window.apptracker('convivaAppTracker',  {
 
 </details>
 
-<details>
-<summary><b>Meta Tags Collection </b></summary>
-This feature enables tracking of meta tags from the `<head>` section of an HTML page based on the provided configuration.
 
-Example meta tags in an HTML Page:
-```js
-<html>
-    <head>
-        <meta name="keywords" content="HTML, CSS, JavaScript">
-        <meta name="description" content="Free Web tutorials for HTML and CSS">
-        <meta name="author" content="John Doe">
-        <meta http-equiv="refresh" content="30">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta property="site_name" content="goole.com">
-        <meta property="title" content="Sample app">
-        <meta property="description" content="TV series content">
-        <meta property="locale" content="es_ES">
-        <meta property="type" content="video">
-    </head>
-</html>
-```
 <details>
 <summary><b>Meta Tags Collection </b></summary>
 
