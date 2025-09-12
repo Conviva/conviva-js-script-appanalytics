@@ -383,7 +383,8 @@ Largest Contentful Paint| timing information about the largest image or text pai
 First App Launch        | First time launch in the browser|Custom Tag Context|
 page_loaded             | On "load" event listener | Used to compute Page Loads, Avg Document Load Time, Avg DNS Lookup Time, Avg Document Response Time metrics.
 | Server-Sent Events | Supports Server-Sent Event (SSE) via Fetch eventstream. |
-| WebSocket message stream | When WebSocket events occur (open, close, send, receive, error) for real-time communication tracking. |
+| WebSocket message stream | When WebSocket events occur (open, close, send, message, error) for real-time communication tracking. |
+| Event source message stream | When Event source events occur (open, send, message, error) for real-time communication tracking. |
 
 To learn about the default metrics for analyzing the native and web applications performance, such as App Crashes, Avg Screen Load Time, and Page Loads, refer to the [ECO Metrics](https://pulse.conviva.com/learning-center/content/eco/eco_metrics.html) page in the Learning Center.
 
@@ -500,7 +501,7 @@ This feature supports to track the Network Requests triggerred with in applicati
 </details>
 
 <details>
-  <summary><b>SSE and Websocket</summary>
+  <summary><b>SSE, Websocket and Event source</summary>
     Only supports json payload
 </details>
 
