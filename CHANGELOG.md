@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 1.4.11 (30/SEP/2025)
+* Introduces Soft Navigation event for Single Page Applications. To enable it, please contact the Conviva Support team. 
+* Fixes issue of loadEventEnd timestamp being 0 (zero) in conviva_window_loaded event.
+
 ## 1.4.9 (19/SEP/2025)
 * Support for Configuration based inference of Rich content for SSE messages through fetch, event stream and websocket events.
 
@@ -17,7 +21,7 @@
 * Supports request or respose size upto 20KB
 
 ## 1.4.3 (28/AUG/2025)
-* Introduces Session Replay
+* Introduces Cohort Replay
   - Cohort Replay enables the visual reconstruction and review of user navigations and actions within a customer's app. This feature captures how users interact with the app, including clicks, navigation, scrolling, media engagement, and text input, and then replays these interactions in a video-like experience.
 
   NOTE: By default, Cohort Replay is disabled. To enable it, please contact the Conviva Support team.
