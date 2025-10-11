@@ -423,7 +423,11 @@ This feature supports tracking network requests triggered within the application
 **Request and Response Body Collection:**
 
   Collected only when:
-  - Size is < 10KB.
+  - Size is < Size limit
+    - Default Size Limit is 10 KB.
+    - Configurable via Remote configuration.
+  - Response body is type XML.
+  - Content-type contains `"xml"` or equals any of `"text/xml"`, `"application/xml"`
   - Response body is type JSON.
   - Content-type contains `"json"` or equals any of `"text/plain"`, `"text/javascript"`, `"application/javascript"`, `"text/html"`
 
@@ -487,7 +491,7 @@ This feature supports to track the Network Requests triggerred with in applicati
 
 <br> *Here are some of the granular details/limitations of the feature:*
 * *Response and Request Body atributes are collected only when the:*
-    * *size is < 10kb and the content-length is available* 
+    * *size is < Remote Configured Limit(Default is 10 KB) and the content-length is available* 
     * *response body is type json and content-type is "json", "text/plain", "text/javascript" or "application/javascript"*
 * *Response and Request Headers are collected only when the:*
     * *server is provisioned with "Access-Control-Expose-Headers:*"* 
