@@ -1,6 +1,6 @@
-# Conviva JavaScript ECO SDK
+# Conviva JavaScript DPI SDK
 
-Use Conviva JavaScript ECO SDK to auto-collect events and track application-specific events and state changes.
+Use Conviva JavaScript DPI SDK to auto-collect events and track application-specific events and state changes.
 
 **Table of Contents**
 - [Quick Start](#quick-start)
@@ -151,13 +151,13 @@ window.apptracker("trackError", { "message": "Test error" });
 <details>
 <summary><b>Client ID Synchronization</b></summary>
 
-When integrating multiple Conviva ECO Sensor instances across different environments (e.g., subdomains of a single customer, mobile apps opening webviews), clientId may not be shared automatically. To maintain consistency, the sensor provides getClientId and setClientId APIs to manually synchronize clientId between instances.
+When integrating multiple Conviva DPI Sensor instances across different environments (e.g., subdomains of a single customer, mobile apps opening webviews), clientId may not be shared automatically. To maintain consistency, the sensor provides getClientId and setClientId APIs to manually synchronize clientId between instances.
 
 Use Cases:
 - Mobile App to WebView Synchronization
 - Cross-Subdomain Client ID Synchronization
 
-**Note**: The Conviva JavaScript ECO SDK utilizes **local storage** to cache some data.
+**Note**: The Conviva JavaScript DPI SDK utilizes **local storage** to cache some data.
 
 - `getClientId()` – Retrieves the current Client ID
 - `setClientId(clientId)` – Sets a specific Client ID
@@ -386,7 +386,7 @@ page_loaded             | On "load" event listener | Used to compute Page Loads,
 | WebSocket message stream | When WebSocket events occur (open, close, send, message, error) for real-time communication tracking. |
 | Event source message stream | When Event source events occur (open, send, message, error) for real-time communication tracking. |
 
-To learn about the default metrics for analyzing the native and web applications performance, such as App Crashes, Avg Screen Load Time, and Page Loads, refer to the [ECO Metrics](https://pulse.conviva.com/learning-center/content/eco/eco_metrics.html) page in the Learning Center.
+To learn about the default metrics for analyzing the native and web applications performance, such as App Crashes, Avg Screen Load Time, and Page Loads, refer to the [DPI Metrics](https://pulse.conviva.com/learning-center/content/eco/eco_metrics.html) page in the Learning Center.
 
 </details>
 
@@ -401,9 +401,9 @@ The collection of all types of clicks is automatically supported, including thos
 **Migration of Pulse dimensions for clicks**
 
 Starting with version [v1.1.2](https://github.com/Conviva/conviva-js-appanalytics/releases/tag/v1.1.2) of the SDK, the attribute keys for click events have been updated.
-If you are using v1.1.1 or earlier and currently mapping `elementText`, you must update your configuration when upgrading to v1.1.2 or later. Specifically, update the mapping in [ECO Activation](https://pulse.conviva.com/app/activation/home) by mapping `elementText` to `text`, then redeploy to apply the changes.
+If you are using v1.1.1 or earlier and currently mapping `elementText`, you must update your configuration when upgrading to v1.1.2 or later. Specifically, update the mapping in [DPI Activation](https://pulse.conviva.com/app/activation/home) by mapping `elementText` to `text`, then redeploy to apply the changes.
 
-To ensure metrics reflect the updates, please review and update your event/metric mappings in [ECO Activation](https://pulse.conviva.com/app/activation/home) if you are using any of the following attributes:
+To ensure metrics reflect the updates, please review and update your event/metric mappings in [DPI Activation](https://pulse.conviva.com/app/activation/home) if you are using any of the following attributes:
 | <=v1.1.1                       | >=v1.1.2                       |
 |--------------------------------|--------------------------------|
 | elementType                    | elementType                    |
@@ -452,7 +452,7 @@ We need minimum of the Video Sensor Core SDK Version of 4.5.13 to be in a stage 
 [v4.7.11](https://github.com/Conviva/conviva-js-coresdk/releases/tag/v4.7.11)
 
 4.7.11 (30/SEP/2024)
-    - Added required attributes in Video events broadcasted to Conviva ECO Sensor SDKs to consume. For non ECO users, there is no impact.
+    - Added required attributes in Video events broadcasted to Conviva DPI Sensor SDKs to consume. For non DPI users, there is no impact.
     - We send following fields from video events into Eco events (name, sid, iid, clid, st, cen, ced, an, pn, cl, lv, tags, vid, url, sst, sid, fw, fwv, mv, mn, old, new).
 
 </details>
@@ -514,4 +514,4 @@ This feature supports to track the Network Requests triggerred with in applicati
 
 ## FAQ
 
-[ECO Integration FAQ](https://pulse.conviva.com/learning-center/content/sensor_developer_center/tools/eco_integration/eco_integration_faq.htm)
+[DPI Integration FAQ](https://pulse.conviva.com/learning-center/content/sensor_developer_center/tools/eco_integration/eco_integration_faq.htm)
