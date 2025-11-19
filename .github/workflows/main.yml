@@ -1,0 +1,73 @@
+name: Upload convivaAppTracker.js to GCS and keep CDN current
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write        
+  id-token: write        
+
+jobs:
+  ship:
+    runs-on: ubuntu-latest
+    env:
+      GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+      WIF_PROVIDER: ${{ vars.WIF_PROVIDER }}
+      GCP_SERVICE_ACCOUNT: ${{ vars.GCP_SERVICE_ACCOUNT }}
+      GCS_BUCKET: ${{ vars.GCS_BUCKET }}
+      FILE_NAME: ${{ vars.FILE_NAME }}
+      PRODUCT_PREFIX: ${{ vars.PRODUCT_PREFIX }}
+      SOURCE_PATH: ${{ vars.SOURCE_PATH }}
+      URL_MAP_NAME: ${{ vars.URL_MAP_NAME }}
+      INVALIDATE_PATH: ${{ vars.INVALIDATE_PATH }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Determine tag
+        id: tag
+        run: echo "TAG=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+
+      - name: Verify source file exists
+        run: |
+          test -f "${SOURCE_PATH}" || { echo "File not found: ${SOURCE_PATH}"; exit 1; }
+
+      - name: Auth to Google (OIDC, no keys)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
+          project_id: ${{ env.GCP_PROJECT_ID }}
+
+      - name: Install gcloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Upload versioned object
+        run: |
+          gcloud storage cp "${SOURCE_PATH}" \
+            "gs://${GCS_BUCKET}/${PRODUCT_PREFIX}/releases/${{ steps.tag.outputs.TAG }}/${FILE_NAME}" \
+            --content-type=application/javascript \
+            --cache-control="public, max-age=31536000, immutable"
+
+      - name: Stat uploaded object
+        run: |
+          gcloud storage ls -L \
+            "gs://${GCS_BUCKET}/${PRODUCT_PREFIX}/releases/${{ steps.tag.outputs.TAG }}/${FILE_NAME}"
+
+      - name: Upload/overwrite stable 'latest' object
+        run: |
+          gcloud storage cp "${SOURCE_PATH}" \
+            "gs://${GCS_BUCKET}/${PRODUCT_PREFIX}/latest/${FILE_NAME}" \
+            --content-type=application/javascript \
+            --cache-control="public, max-age=300" \
+            --content-disposition="attachment; filename=${FILE_NAME}"
+
+
+      - name: Invalidate Cloud CDN cache
+        if: env.URL_MAP_NAME != ''
+        run: |
+          gcloud compute url-maps invalidate-cdn-cache "${URL_MAP_NAME}" \
+            --path "${INVALIDATE_PATH}" \
+            --async
