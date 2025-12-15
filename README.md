@@ -86,6 +86,45 @@ window.apptracker('trackPageView', {"title": "Custom Page Title"});
 
 <details>
 <!--self-serve-custom-event-->
+<summary><b>Track Network Request Event</b></summary>
+
+Use the **trackNetworkRequest()** API to track all kinds of network events. This API provides 2 Objects to describe the tracked events:
+
+**requestDetails** - Information about the outgoing request.
+
+**responseDetails** - Information about the response.
+
+```js
+import { trackNetworkRequest } from '@convivainc/conviva-js-appanalytics'
+
+const requestDetails = {
+    url: url, // url
+    method: method, // 'GET', 'POST', etc.
+    headers: requestHeaders, // e.g., { 'Content-Type': 'application/json' }
+    body: requestBody, // e.g., JSON.stringify({ key: 'value' })
+    requestTime: performance?.now() ?? Date.now(),
+    size: requestBodySize //size of the request body
+};
+
+// Make Actual network request
+// consider `res` has the actual network request response details
+
+const responseDetails = {
+    status: res.status, // e.g., 200, 404
+    statusText: res.statusText,  // e.g., 'OK', 'Not Found'
+    responseTime: performance?.now() ?? Date.now(),
+    body: await res.clone().json(),  // parsed JSON response
+    headers: Object.fromEntries(res.headers.entries()), // response headers
+};
+
+trackNetworkRequest({ requestDetails, responseDetails });
+
+```
+<!--eof-self-serve-custom-event-->
+</details>
+
+<details>
+<!--self-serve-custom-event-->
 <summary><b>Track Custom Event</b></summary>
     
 Use trackCustomEvent() API to track all kinds of events. This API provides 2 fields to describe the tracked events.
