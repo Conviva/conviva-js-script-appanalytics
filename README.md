@@ -424,6 +424,7 @@ page_loaded             | On "load" event listener | Used to compute Page Loads,
 | Server-Sent Events | Supports Server-Sent Event (SSE) via Fetch eventstream. |
 | WebSocket message stream | When WebSocket events occur (open, close, send, message, error) for real-time communication tracking. |
 | Event source message stream | When Event source events occur (open, send, message, error) for real-time communication tracking. |
+| Core Web Vitals| On `visibilitychange`/first user interaction (LCP, INP, CLS) | Automatically collects Core Web Vitals using [web-vitals](https://www.npmjs.com/package/web-vitals/v/5.1.0) |
 
 To learn about the default metrics for analyzing the native and web applications performance, such as App Crashes, Avg Screen Load Time, and Page Loads, refer to the [DPI Metrics](https://pulse.conviva.com/learning-center/content/eco/eco_metrics.html) page in the Learning Center.
 
