@@ -274,6 +274,21 @@ Example Configuration:
 </details>
 
 <details>
+<summary><b>Replay</b></summary>
+From release 1.5.2 onwards to avail the replay feature follow the below instruction
+
+#### Simple Usage (Recommended)
+```html
+<script src= "<<URL / Path to conviva-replay.umd.min.js>>"></script>
+<script>
+  // Just provide your customer key - that's it!
+  ConvivaReplay.init('CONVIVA_ACCOUNT_CUSTOMER_KEY');
+</script>
+```
+
+</details>
+
+<details>
 <summary><b>Set Device Metadata</b></summary>
 
 
