@@ -5,8 +5,8 @@ on:
     types: [published]
 
 permissions:
-  contents: write        
-  id-token: write        
+  contents: write
+  id-token: write
 
 jobs:
   ship:
@@ -17,7 +17,6 @@ jobs:
       GCP_SERVICE_ACCOUNT: ${{ vars.GCP_SERVICE_ACCOUNT }}
       GCS_BUCKET: ${{ vars.GCS_BUCKET }}
       FILE_NAME: ${{ vars.FILE_NAME }}
-      PRODUCT_PREFIX: ${{ vars.PRODUCT_PREFIX }}
       SOURCE_PATH: ${{ vars.SOURCE_PATH }}
       URL_MAP_NAME: ${{ vars.URL_MAP_NAME }}
       INVALIDATE_PATH: ${{ vars.INVALIDATE_PATH }}
@@ -47,23 +46,22 @@ jobs:
       - name: Upload versioned object
         run: |
           gcloud storage cp "${SOURCE_PATH}" \
-            "gs://${GCS_BUCKET}/${PRODUCT_PREFIX}/releases/${{ steps.tag.outputs.TAG }}/${FILE_NAME}" \
+            "gs://${GCS_BUCKET}/releases/${{ steps.tag.outputs.TAG }}/${FILE_NAME}" \
             --content-type=application/javascript \
             --cache-control="public, max-age=31536000, immutable"
 
       - name: Stat uploaded object
         run: |
           gcloud storage ls -L \
-            "gs://${GCS_BUCKET}/${PRODUCT_PREFIX}/releases/${{ steps.tag.outputs.TAG }}/${FILE_NAME}"
+            "gs://${GCS_BUCKET}/releases/${{ steps.tag.outputs.TAG }}/${FILE_NAME}"
 
       - name: Upload/overwrite stable 'latest' object
         run: |
           gcloud storage cp "${SOURCE_PATH}" \
-            "gs://${GCS_BUCKET}/${PRODUCT_PREFIX}/latest/${FILE_NAME}" \
+            "gs://${GCS_BUCKET}/latest/${FILE_NAME}" \
             --content-type=application/javascript \
             --cache-control="public, max-age=300" \
             --content-disposition="attachment; filename=${FILE_NAME}"
-
 
       - name: Invalidate Cloud CDN cache
         if: env.URL_MAP_NAME != ''
