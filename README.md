@@ -283,6 +283,7 @@ From release 1.5.2 onwards to avail the replay feature follow the below instruct
 <script>
   // Just provide your customer key - that's it!
   ConvivaReplay.init('CONVIVA_ACCOUNT_CUSTOMER_KEY');
+  //ADD THIS BEFORE APP TRACKER INITIALISATION
 </script>
 ```
 
