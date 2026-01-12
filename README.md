@@ -594,6 +594,7 @@ This feature supports to track the Network Requests triggerred with in applicati
 If a user closes the browser tab after performing an activity, the last up to 1 minute of user activity per origin may not be available immediately.
 This duration represents the maximum possible gap; in most cases, the unavailable replay segment will be less than 1 minute.
 Replay data for that origin will resume only after the application is relaunched and the user returns to the same origin.
+
 **Notes**
 1. This limitation applies on a per-origin basis.
 2. Once the user revisits the same origin, replay capture and availability continue as expected.
