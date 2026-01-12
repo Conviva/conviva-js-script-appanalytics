@@ -286,7 +286,29 @@ From release 1.5.2 onwards to avail the replay feature follow the below instruct
   //ADD THIS BEFORE APP TRACKER INITIALISATION
 </script>
 ```
+#### Important configurations
 
+##### Content Security Policy (CSP): allow Web Workers (Blob)
+Some environments enforce a strict Content Security Policy (CSP). The SDK uses a Web Worker created from a blob: URL, which requires explicitly allowing workers.
+Add the following directive to your site’s Content-Security-Policy:
+```typescript
+Content-Security-Policy: worker-src 'self' blob:;
+```
+**Notes**
+1. If your policy already includes worker-src, extend it to include blob:.
+2. If worker-src is not defined, browsers may fall back to script-src, which can prevent worker creation.
+
+##### CORS: allow loading required external assets (CSS/SVG)
+On many websites, required assets (commonly CSS files or SVGs) may be hosted on a different origin (domain/subdomain). If those assets are blocked by cross-origin restrictions, configure the hosting server/CDN to allow cross-origin access.
+Ensure the asset server returns appropriate CORS response headers, such as:
+```typescript
+Access-Control-Allow-Origin: https://pulse.conviva.com
+// If the host changes or a new host is introduced in the future, it should be allowed as well.
+```
+Or, if your security policy allows it:
+```typescript
+Access-Control-Allow-Origin: *
+```
 </details>
 
 <details>
@@ -564,6 +586,18 @@ This feature supports to track the Network Requests triggerred with in applicati
   <summary><b>SSE, Websocket and Event source</summary>
     Only supports json payload for SSE and Event source.
     Supports json and Array Buffer for websocket.
+</details>
+
+<details>
+  <summary>Replay availability after tab close</summary>
+
+If a user closes the browser tab after performing an activity, the last up to 1 minute of user activity per origin may not be available immediately.
+This duration represents the maximum possible gap; in most cases, the unavailable replay segment will be less than 1 minute.
+Replay data for that origin will resume only after the application is relaunched and the user returns to the same origin.
+**Notes**
+1. This limitation applies on a per-origin basis.
+2. Once the user revisits the same origin, replay capture and availability continue as expected.
+
 </details>
 
 #### Note:- To integrate Conviva App Experience with web applications having multiple HTML pages, add the aforementioned instructions to each HTML page. 
