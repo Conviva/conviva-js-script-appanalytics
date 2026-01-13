@@ -1,7 +1,7 @@
 
 # Changelog
 
-## 1.5.5 (13/JAN/2025)
+## 1.5.5 (13/JAN/2026)
 * Enhanced the remote configuration feature to support instant updates.
 * Fixed issue where events were lost on browser tab close or link click in multi-page applications.
 * Fixed issue where page query parameters were not collected for initial events sent before the page-view event or window load event.
