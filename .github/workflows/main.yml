@@ -3,6 +3,12 @@ name: Upload convivaAppTracker.js to GCS and keep CDN current
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to process (e.g., v1.2.3)'
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -20,12 +26,21 @@ jobs:
       WIF_PROVIDER: ${{ vars.WIF_PROVIDER }}
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Determine tag
         id: tag
-        run: echo "TAG=${{ github.event.release.tag_name }}" >> "$GITHUB_OUTPUT"
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            echo "TAG=${{ github.event.release.tag_name }}" >> "$GITHUB_OUTPUT"
+            echo "REF=${{ github.event.release.tag_name }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "TAG=${{ github.event.inputs.tag }}" >> "$GITHUB_OUTPUT"
+            echo "REF=${{ github.event.inputs.tag }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.tag.outputs.REF }}
 
       - name: Verify source file exists
         run: |
@@ -46,16 +61,14 @@ jobs:
           gcloud storage cp "./${FILE_NAME}" \
             "gs://${GCS_BUCKET}/dpi/releases/${{ steps.tag.outputs.TAG }}/${FILE_NAME}" \
             --content-type=application/javascript \
-            --cache-control="public, max-age=300, immutable" \
-            --content-disposition="attachment; filename=${FILE_NAME}"
+            --cache-control="public, max-age=300, immutable"
 
       - name: Upload/overwrite stable 'latest' object
         run: |
           gcloud storage cp "./${FILE_NAME}" \
             "gs://${GCS_BUCKET}/dpi/latest/${FILE_NAME}" \
             --content-type=application/javascript \
-            --cache-control="public, max-age=300" \
-            --content-disposition="attachment; filename=${FILE_NAME}"
+            --cache-control="public, max-age=300"
 
       - name: Invalidate Cloud CDN cache
         if: env.URL_MAP_NAME != ''
