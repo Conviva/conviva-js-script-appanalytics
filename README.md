@@ -31,8 +31,6 @@ Below 2 arguments are passed to function one is the global scope in which your a
 ```
 Conviva hosts sensor scripts on its CDN, allowing direct integration via <script> tags without needing a package manager. The CDN URLs follow the pattern below, where the version segment (e.g., v1.5.5, v1.0.1) should be replaced with the desired sensor version:
 
-DPI Sensor: https://sensor.conviva.com/dpi/releases/<<version>>/convivaAppTracker.js
-
 To use them, add a script tag to your HTML:
 ```js
 // Add following tag to your html head section
