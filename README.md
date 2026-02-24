@@ -289,7 +289,8 @@ Example Configuration:
 
 <details>
 <summary><b>Replay</b></summary>
-From DPI release 1.5.2 onwards to avail the replay feature follow the below instruction
+From DPI release 1.5.2 onwards, The replay module is a standalone module for Conviva analytics that works with both npm and script tags.
+https://github.com/Conviva/conviva-js-replay
 
 Conviva hosts sensor scripts on its CDN, allowing direct integration via <script> tags without needing a package manager. The CDN URLs follow the pattern below, where the version segment (e.g., v1.0.0, v1.0.1) should be replaced with the desired sensor version:
 
