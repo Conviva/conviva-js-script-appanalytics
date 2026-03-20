@@ -727,7 +727,7 @@ Replay data for that origin will resume only after the application is relaunched
 Please add below CSP configuration.
     
 ```typescript
-Content-Security-Policy: 'script-src 'self' cdnjs.cloudflare.com;
+Content-Security-Policy: script-src 'self' cdnjs.cloudflare.com;
 ```
 
 </details>
