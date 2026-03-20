@@ -343,7 +343,7 @@ Content-Security-Policy: worker-src 'self' blob:;
 1. If your policy already includes worker-src, extend it to include blob:.
 2. If worker-src is not defined, browsers may fall back to script-src, which can prevent worker creation.
 
-For replay support till version 1.5.1 please add below CSP configuration.
+##### For replay support till version 1.5.1 please add below CSP configuration.
     
 ```typescript
 Content-Security-Policy: script-src 'self' cdnjs.cloudflare.com;
