@@ -85,7 +85,7 @@ window.apptracker('convivaAppTracker', {
 
 **Important configurations**
 ```typescript
-Content-Security-Policy: connect-src 'self' https://rc.conviva.com/ http://appgw.conviva.com/ https://rcg.conviva.com/;
+Content-Security-Policy: connect-src 'self' https://rc.conviva.com/ http://appgw.conviva.com/ https://rcg.conviva.com/; script-src 'self' sensor.conviva.com
 ```
 
 #### Set the user id (viewer id)
@@ -336,7 +336,7 @@ Conviva's CDN supports Brotli and gzip compression. When the browser sends the a
 Some environments enforce a strict Content Security Policy (CSP). The SDK uses a Web Worker created from a blob: URL, which requires explicitly allowing workers.
 Add the following directive to your site’s Content-Security-Policy:
 ```typescript
-Content-Security-Policy: worker-src 'self' blob:;
+Content-Security-Policy: worker-src 'self' blob:; script-src 'self' cdnjs.cloudflare.com sensor.conviva.com
 ```
 **Notes**
 1. If your policy already includes worker-src, extend it to include blob:.
