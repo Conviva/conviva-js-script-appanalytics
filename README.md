@@ -85,7 +85,7 @@ window.apptracker('convivaAppTracker', {
 
 **Important configurations**
 ```typescript
-Content-Security-Policy: connect-src 'self' https://rc.conviva.com/ http://appgw.conviva.com/ https://rcg.conviva.com/; script-src 'self' sensor.conviva.com
+Content-Security-Policy: connect-src 'self' https://rc.conviva.com/ http://appgw.conviva.com/ https://rcg.conviva.com/; script-src 'self' sensor.conviva.com;
 ```
 
 #### Set the user id (viewer id)
@@ -336,7 +336,7 @@ Conviva's CDN supports Brotli and gzip compression. When the browser sends the a
 Some environments enforce a strict Content Security Policy (CSP). The SDK uses a Web Worker created from a blob: URL, which requires explicitly allowing workers.
 Add the following directive to your site’s Content-Security-Policy:
 ```typescript
-Content-Security-Policy: worker-src 'self' blob:; script-src 'self' cdnjs.cloudflare.com sensor.conviva.com
+Content-Security-Policy: worker-src 'self' blob:;
 ```
 **Notes**
 1. If your policy already includes worker-src, extend it to include blob:.
@@ -718,6 +718,17 @@ Replay data for that origin will resume only after the application is relaunched
 **Notes**
 1. This limitation applies on a per-origin basis.
 2. Once the user revisits the same origin, replay capture and availability continue as expected.
+
+</details>
+
+<details>
+  <summary>For replay support till version 1.5.1</summary>
+    
+Please add below CSP configuration.
+    
+```typescript
+Content-Security-Policy: 'script-src 'self' cdnjs.cloudflare.com;
+```
 
 </details>
 
