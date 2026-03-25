@@ -14,6 +14,12 @@ Use Conviva JavaScript DPI SDK to auto-collect events and track application-spec
 
 ## Quick Start
 
+### AI Prompt
+The developer can use directly this prompt in their AI powered IDE's like Cursor, AntiGravity, VIsual Code Copilot to integrate Conviva DPI SDK.
+```
+Integrate Conviva JS DPI SDK using https://github.com/Conviva/conviva-js-script-appanalytics
+```
+
 ### 1. Installation
 <!--self-serve[Manual]-->
 #### Add the following script to the HTML head section of your website:
