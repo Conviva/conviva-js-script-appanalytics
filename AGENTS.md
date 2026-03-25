@@ -1,0 +1,271 @@
+# AGENTS.md
+
+Conviva JavaScript Script App Analytics SDK — AI Agent Integration Specification
+
+Repository: `Conviva/conviva-js-script-appanalytics`
+SDK Type: Script-based (CDN)
+Language: JavaScript
+Platform: Web
+
+---
+
+# Purpose
+
+This file is the authoritative operating contract for AI agents integrating the Conviva script-based App Analytics SDK. It takes precedence over all other documentation.
+
+Agents help developers integrate the SDK correctly, with minimal diffs, using only documented APIs.
+
+---
+
+# Hard Rules
+
+## Never invent SDK APIs
+
+Agents must only use the script-based API via `window.apptracker(...)`. Do NOT generate npm/yarn imports, ES module usage, undocumented methods, undocumented config fields, or automatic tracking assumptions.
+
+If a requested feature cannot be implemented using the allowed API surface, the agent must say so explicitly.
+
+## Never fabricate required values
+
+Agents must never invent customer keys, appId, appVersion, or userId. Missing values must be placeholders: `REPLACE_ME`.
+
+## Minimize codebase modifications
+
+Modify as few files as possible. Prefer existing bootstrap points. **Smallest safe diff.**
+
+## Initialize exactly once
+
+SDK must initialize once, early in page load. Never inside loops, components, or repeated event handlers.
+
+## Never implement optional APIs without explicit request
+
+`trackCustomEvent` must not be added to any integration unless the developer explicitly asks for it.
+
+## Never hardcode CDN versions
+
+Agents must not hardcode the SDK CDN version unless the developer explicitly requests a specific version.
+
+- Verify the latest version from the repository's GitHub Tags or Releases before generating any CDN URL.
+- If the latest version cannot be verified, use a placeholder: `vREPLACE_ME_VERSION`
+- This applies to both the DPI script and the Replay script.
+
+---
+
+# Required Inputs Before Integration
+
+| Field              | Required | Purpose / Example                     |
+| ------------------ | -------- | ------------------------------------- |
+| convivaCustomerKey | Yes      | `"abc123"`                            |
+| appId              | Yes      | `"WebApp"`                            |
+| appVersion         | Yes      | `"1.0.0"`                             |
+| appType            | Yes      | `"SPA"` or `"MPA"`                    |
+| HTML entry point   | Often    | where to add the bootstrap snippet    |
+| user identity      | Often    | for setUserId; verify not PII         |
+| session replay     | Ask      | optional feature — must ask developer |
+
+---
+
+# Allowed API Surface
+
+```js
+window.apptracker('convivaAppTracker', { appId, convivaCustomerKey, appVersion });
+window.apptracker('setUserId', userId);
+window.apptracker('trackPageView');
+window.apptracker('trackPageView', { title: 'Custom Page Title' }); // optional title
+window.apptracker('trackCustomEvent', { name: 'event_name', data: {} }); // [OPTIONAL]
+```
+
+---
+
+# Agent Integration Workflow
+
+### Step 1 — Identify app type
+
+Identify SPA or MPA. If unclear, ask the developer.
+
+### Step 2 — Identify HTML integration point
+
+Ask the developer where to add the Conviva script (HTML `<head>` or template file). Do not assume file names or structure.
+
+### Step 3 — Add bootstrap snippet
+
+Place in `<head>` before the CDN script:
+
+```html
+<script>
+(function(p, i) {
+  if (!p[i]) {
+    p.GlobalConvivaNamespace = p.GlobalConvivaNamespace || [];
+    p.GlobalConvivaNamespace.push(i);
+    p[i] = function() { (p[i].q = p[i].q || []).push(arguments) };
+    p[i].q = p[i].q || [];
+  }
+}(window, "apptracker"));
+</script>
+```
+
+### Step 4 — Add CDN script
+
+Verify the latest version from GitHub Tags/Releases before generating the URL:
+
+```html
+<script src="https://sensor.conviva.com/dpi/releases/vREPLACE_ME_VERSION/convivaAppTracker.js"></script>
+```
+
+### Step 5 — Initialize SDK
+
+```js
+window.apptracker('convivaAppTracker', {
+  appId: 'REPLACE_ME_APP_ID',
+  convivaCustomerKey: 'REPLACE_ME_CUSTOMER_KEY',
+  appVersion: 'REPLACE_ME_APP_VERSION'
+});
+```
+
+### Step 6 — Set user identity
+
+```js
+window.apptracker('setUserId', 'REPLACE_ME_USER_ID');
+```
+
+Update on: login, logout, account switch. Ask developer if anonymous/guest users have no ID. Ask developer to verify the value is not PII.
+
+### Step 7 — Track page views
+
+Page views are **not automatically captured**. Call explicitly:
+
+```js
+window.apptracker('trackPageView');
+// optional custom title:
+window.apptracker('trackPageView', { title: 'Page Title' });
+```
+
+---
+
+# Page View Tracking Rules
+
+Call `trackPageView` only after the page is visible and usable.
+
+## SPA
+
+SPA page view tracking decision:
+
+1. Framework router present → call on route change
+2. History/hash API used → call on navigation event
+3. No navigation mechanism → call once after initial render
+
+Do not assume a router exists. Never fire before UI is visible. Every logical screen change must trigger a page view.
+
+### React SPA Without Router — fire once on mount
+
+```js
+useEffect(() => {
+  window.apptracker('trackPageView');
+}, []);
+```
+
+### React SPA With Router — fire on every route change
+
+```js
+useEffect(() => {
+  window.apptracker('trackPageView');
+}, [location]);
+```
+
+## MPA
+
+```js
+window.addEventListener('load', () => {
+  window.apptracker('trackPageView');
+});
+```
+
+---
+
+# Custom Event Tracking — Optional
+
+**Do not implement unless the developer explicitly requests it.**
+
+```js
+window.apptracker('trackCustomEvent', {
+  name: 'checkout_started',
+  data: { step: 1 }
+});
+```
+
+Rules: stable event names, small payloads, no sensitive data.
+
+---
+
+# Replay Integration
+
+Verify the latest Replay version from GitHub Tags/Releases before generating the URL.
+
+```html
+<script src="https://sensor.conviva.com/replay/releases/vREPLACE_ME_VERSION/conviva-replay.umd.min.js"></script>
+<script>
+  ConvivaReplay.init('REPLACE_ME_CUSTOMER_KEY');
+</script>
+```
+
+Replay must initialize **before** `convivaAppTracker`. Incorrect order will break replay.
+
+---
+
+# Content Security Policy
+
+```
+connect-src https://rc.conviva.com/ http://appgw.conviva.com/ https://rcg.conviva.com/
+```
+
+Replay may also require: `worker-src 'self' blob:;`
+
+---
+
+# Troubleshooting
+
+- **No data** → check: script loaded, SDK initialized, placeholders replaced, CSP not blocking
+- **Page views missing** → check: `trackPageView` called after UI is visible, route-change hook present
+- **User ID missing** → check: `setUserId` called after login
+- **Replay broken** → check: Replay script loaded and `ConvivaReplay.init()` called BEFORE `convivaAppTracker`
+
+---
+
+# Anti-Hallucination Rules
+
+Do NOT use npm/ES module imports — this is a script-only SDK:
+
+```js
+// WRONG
+import { convivaAppTracker } from "@convivainc/conviva-js-appanalytics";
+```
+
+Do NOT assume page tracking is automatic — always call `trackPageView` explicitly.
+
+Do NOT invent config flags:
+
+```js
+// WRONG
+window.apptracker('convivaAppTracker', { autoTrackPages: true });
+```
+
+Do NOT assume replay is built-in — it requires a separate CDN script.
+
+Do NOT hardcode CDN versions — always verify from GitHub or use `vREPLACE_ME_VERSION`.
+
+---
+
+# Mandatory Prompt Template for AI Agents
+
+Before generating final integration code, agents must request:
+
+```
+To integrate Conviva App Analytics I need:
+
+1. Conviva Customer Key
+2. appId
+3. appVersion
+4. Where should the scripts be added (HTML file or template)?
+5. Where does user identity come from?
+6. Should session replay be enabled?
+```
