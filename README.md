@@ -552,7 +552,13 @@ window.apptracker('trackRevenueEvent', {
 });
 ```
 
-**Note:** If validation fails (e.g. missing `transactionId` or non-finite `totalOrderAmount`), the SDK logs a warning and skips the event without throwing.
+**Validation behaviour:**
+- **Required fields** (`totalOrderAmount`, `transactionId`, `currency`) — if missing or invalid, the SDK logs a warning and **skips the event** without throwing.
+- **Optional number fields** (`taxAmount`, `shippingCost`, `discount`, `cartSize`) — if present but not a number, the field is **stripped** and the event is still sent.
+- **Optional string fields** (`paymentMethod`, `paymentProvider`, `orderStatus`) — if present but not a string, the field is **stripped** and the event is still sent.
+- **`items`** — if present but not an array, it is **stripped** and the event is still sent.
+- **`extraMetadata`** — if present but not a plain object (e.g. array, string), it is **stripped** and the event is still sent.
+- Passing `null`, `undefined`, or a non-object (string, number, array) as the event argument logs a warning and **skips the event**.
 <!--eof-self-serve-custom-event-->
 </details>
 
@@ -593,7 +599,8 @@ page_loaded             | On "load" event listener | Used to compute Page Loads,
 | Server-Sent Events | Supports Server-Sent Event (SSE) via Fetch eventstream. |
 | WebSocket message stream | When WebSocket events occur (open, close, send, message, error) for real-time communication tracking. |
 | Event source message stream | When Event source events occur (open, send, message, error) for real-time communication tracking. |
-| Core Web Vitals| On `visibilitychange`/first user interaction (LCP, INP, CLS) | Automatically collects Core Web Vitals using [web-vitals](https://www.npmjs.com/package/web-vitals/v/5.1.0) |
+| Core Web Vitals (LCP, INP, CLS) | At pagehide/visibilitychange | Automatically collects Core Web Vitals using [web-vitals](https://www.npmjs.com/package/web-vitals/v/5.1.0). LCP: Chromium, Firefox. INP, CLS: Chromium. Enabled when `webVitals.enabled: true` in remote config. |
+| Supplementary Web Vitals (FCP, TTFB) | Early in page load, once after navigation | FCP (First Contentful Paint) and TTFB (Time to First Byte). Browser support: Chromium, Firefox, Safari. Enabled when both `webVitals.enabled: true` and `webVitals.enabledAdditionalMetrics: true` in remote config. |
 
 To learn about the default metrics for analyzing the native and web applications performance, such as App Crashes, Avg Screen Load Time, and Page Loads, refer to the [DPI Metrics](https://pulse.conviva.com/learning-center/content/eco/eco_metrics.html) page in the Learning Center.
 
