@@ -38,6 +38,11 @@ Conviva hosts sensor scripts on its CDN, allowing direct integration via <script
 To use them, add a script tag to your HTML:
 ```js
 // Add following tag to your html head section
+<script src="https://sensor.conviva.com/dpi/releases/<version>/convivaAppTracker.js"></script>
+```
+example
+```js
+// Add following tag to your html head section
 <script src="https://sensor.conviva.com/dpi/releases/v1.5.5/convivaAppTracker.js"></script>
 ```
 
