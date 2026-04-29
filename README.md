@@ -116,42 +116,34 @@ When using multiple Conviva JavaScript DPI SDK instances across different enviro
 
 Eg: Synchronizing Client ID between a mobile app and WebView.
   
-- `getClientId()` – Retrieves the current Client ID
-- `setClientId(clientId)` – Sets a specific Client ID
+- `getClientId` – Retrieves the current Client ID
+- `setClientId` – Sets a specific Client ID
 
 **Retrieve the Client ID**
 
 ```js
-import {
-	convivaAppTracker,
-	getClientId,
-} from '@convivainc/conviva-js-appanalytics';
 
-convivaAppTracker({
-	appId: 'YOUR_APP_NAME_AS_STRING',
-	convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY',
-	appVersion: '1.1.0',
+window.apptracker('convivaAppTracker', {
+    appId: 'YOUR_APP_NAME',
+    convivaCustomerKey: 'YOUR_CUSTOMER_KEY',
+    appVersion: '1.1.0'
 });
 
-// Always call getClientId() after initializing convivaAppTracker()
-clientId = getClientId();
+// Always call getClientId after initializing convivaAppTracker
+clientId = window.apptracker('getClientId');
 ```
 
 **Set the Client ID**
 
 ```js
-import {
-	convivaAppTracker,
-	getClientId,
-} from '@convivainc/conviva-js-appanalytics';
 
-// Always call setClientId() before initializing convivaAppTracker() to set a specific clientId
-setClientId(clientId);
+// Always call setClientId before initializing convivaAppTracker to set a specific clientId
+window.apptracker('setClientId', clientId);
 
-convivaAppTracker({
-	appId: 'YOUR_APP_NAME_AS_STRING',
-	convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY',
-	appVersion: '1.1.0',
+window.apptracker('convivaAppTracker', {
+    appId: 'YOUR_APP_NAME',
+    convivaCustomerKey: 'YOUR_CUSTOMER_KEY',
+    appVersion: '1.1.0'
 });
 ```
 
@@ -160,11 +152,8 @@ convivaAppTracker({
 To disable sharing clientId using cookie, you need to set the `enableClIdInCookies` configuration as false during SDK initialization.
 
 ```js
-import {
-	convivaAppTracker,
-} from '@convivainc/conviva-js-appanalytics';
 
-convivaAppTracker({
+window.apptracker('convivaAppTracker', {
 	appId: 'YOUR_APP_NAME_AS_STRING',
 	convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY',
 	appVersion: '1.1.0',
