@@ -1,7 +1,7 @@
 
 # Changelog
 
-## 2.1.o (29/APR/2026)
+## 2.1.0 (29/APR/2026)
 * Scroll Depth Tracking: Automatically measures how far users scroll down each page, firing events at configurable depth milestones (25%, 50%, 75%, 100% by default). Also fires a scroll_reset events when orientation / size of page changes.
 * Form Lifecycle Tracking: Captures user interactions with web forms.
 * Client ID cookie enabled by default: The tracker now persists the client ID in a cookie automatically — no configuration required. Set enableClIdInCookies: false explicitly to opt out.
