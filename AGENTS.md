@@ -49,6 +49,10 @@ Agents must not hardcode the SDK CDN version unless the developer explicitly req
 - If the latest version cannot be verified, use a placeholder: `vREPLACE_ME_VERSION`
 - This applies to both the DPI script and the Replay script.
 
+## Always wrap integration code using try-catch
+
+All the Conviva integration code generated into application must be wrapped inside try catch blocks. They must not cause unhandled exceptions or crashes.
+
 ---
 
 # Required Inputs Before Integration
@@ -209,6 +213,37 @@ Verify the latest Replay version from GitHub Tags/Releases before generating the
 ```
 
 Replay must initialize **before** `convivaAppTracker`. Incorrect order will break replay.
+
+---
+
+# Client ID Synchronization
+
+**Conviva Client ID is automatically stored in cookies during initialization**
+Check with developer if he/she wants to disable the use of cookie named "Conviva_sdkConfig" by SDK. To disable, modify step 4: Initialize SDK to following:
+
+```js
+window.apptracker('convivaAppTracker', {
+	appId: 'YOUR_APP_NAME_AS_STRING',
+	convivaCustomerKey: 'CONVIVA_ACCOUNT_CUSTOMER_KEY',
+	appVersion: '1.1.0',
+	configs: {
+		enableClIdInCookies: false
+	},
+});
+```
+
+## *Optional*
+**Agents must NOT implement `getClientId` or `setClientId` unless the developer explicitly requests it.**
+
+These APIs are for special use cases only, such as synchronizing a Conviva client ID across multiple domains or subdomains. These APIs must be used only when enableClidInCookies is set to false during initialization.
+Do not add them to a standard single-domain integration.
+
+When requested:
+
+```js
+window.apptracker('getClientId');          // call after initialization
+window.apptracker('setClientId', clientId);  // call before initialization
+```
 
 ---
 
