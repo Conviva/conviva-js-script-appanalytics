@@ -41,6 +41,8 @@ SDK must initialize once, early in page load. Never inside loops, components, or
 
 `trackCustomEvent` must not be added to any integration unless the developer explicitly asks for it.
 
+The manual form-tracking APIs (`trackFormView`, `trackFormSubmitSuccess`, `trackFormSubmitError`, `trackFormValidationError`) must not be added unless the developer explicitly asks for them. Form tracking is primarily an **auto-collected** feature controlled by Conviva remote configuration — no code is required to enable it.
+
 ## Never hardcode CDN versions
 
 Agents must not hardcode the SDK CDN version unless the developer explicitly requests a specific version.
@@ -77,6 +79,12 @@ window.apptracker('setUserId', userId);
 window.apptracker('trackPageView');
 window.apptracker('trackPageView', { title: 'Custom Page Title' }); // optional title
 window.apptracker('trackCustomEvent', { name: 'event_name', data: {} }); // [OPTIONAL]
+
+// [OPTIONAL] Manual form-tracking APIs — only add when the developer explicitly asks.
+window.apptracker('trackFormView', formId);
+window.apptracker('trackFormSubmitSuccess', formId);
+window.apptracker('trackFormSubmitError', formId, errorType);
+window.apptracker('trackFormValidationError', formId, fieldName, errorType);
 ```
 
 ---
@@ -201,6 +209,44 @@ Rules: stable event names, small payloads, no sensitive data.
 
 ---
 
+# Form Tracking — Optional
+
+**Form tracking is primarily an auto-collected feature controlled by Conviva remote configuration.** When enabled remotely, the SDK automatically captures the following events with no code changes:
+
+- `conviva_form_start` — first user interaction with a form
+- `conviva_form_field_blur` — field loses focus (sensitive/denylisted fields are redacted)
+- `conviva_form_submit_attempt` — form `submit` event fires
+- `conviva_form_validation_error` — field fails the browser's constraint validation
+
+The `form_id` is derived from the form's `id` attribute, falling back to its `data-form-id` attribute when present.
+
+## Manual form APIs — only when explicitly requested
+
+**Do not add the manual form-tracking APIs unless the developer explicitly asks for them.** They are intended to report lifecycle outcomes the SDK cannot infer from the DOM (e.g. server-side submission outcomes, custom validation logic).
+
+```js
+// Form became visible to the user.
+window.apptracker('trackFormView', 'REPLACE_ME_FORM_ID');
+
+// Server-side submission accepted.
+window.apptracker('trackFormSubmitSuccess', 'REPLACE_ME_FORM_ID');
+
+// Server-side submission rejected.
+window.apptracker('trackFormSubmitError', 'REPLACE_ME_FORM_ID', 'REPLACE_ME_ERROR_TYPE');
+
+// Custom client-side validation failure (not detected by HTML5 constraint validation).
+window.apptracker('trackFormValidationError', 'REPLACE_ME_FORM_ID', 'REPLACE_ME_FIELD_NAME', 'REPLACE_ME_ERROR_TYPE');
+```
+
+## Rules for manual form APIs
+
+- The `formId` passed to manual APIs must match the form's DOM `id` (or `data-form-id`) so manual events correlate with auto-collected `conviva_form_*` events.
+- `errorType` and `fieldName` must be short, stable, non-PII strings. Never pass user input, raw error messages, email addresses, names, tokens, or any sensitive data.
+- Manual form APIs are no-ops when form tracking is disabled in remote configuration — do not rely on them as a substitute for remote enablement.
+- Do not invent new form APIs. Only the four APIs listed above exist.
+
+---
+
 # Replay Integration
 
 Verify the latest Replay version from GitHub Tags/Releases before generating the URL.
@@ -287,6 +333,17 @@ window.apptracker('convivaAppTracker', { autoTrackPages: true });
 Do NOT assume replay is built-in — it requires a separate CDN script.
 
 Do NOT hardcode CDN versions — always verify from GitHub or use `vREPLACE_ME_VERSION`.
+
+Do NOT add manual form-tracking APIs unless explicitly requested. Form tracking is primarily auto-collected via Conviva remote configuration:
+
+```js
+// WRONG — do not add proactively. Only the four documented form APIs exist:
+// trackFormView, trackFormSubmitSuccess, trackFormSubmitError, trackFormValidationError.
+window.apptracker('trackFormSubmit', 'signup-form');     // invented API
+window.apptracker('trackFormFieldFocus', 'signup-form'); // invented API
+```
+
+Do NOT pass PII or raw error messages to `trackFormSubmitError` / `trackFormValidationError` — only short, stable, non-PII identifiers.
 
 ---
 
