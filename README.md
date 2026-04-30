@@ -592,7 +592,8 @@ window.apptracker('trackNetworkRequest',{ requestDetails, responseDetails });
 
 **Form Tracking**
 
-The SDK can automatically track form interactions on a page when this feature is enabled for your account via Conviva remote configuration. **No code changes are required** to enable auto-collection — it is fully managed remotely.
+The SDK can automatically track form interactions on a page when this feature is enabled for your account via Conviva remote configuration.
+
 
 **Manual form APIs**
 
