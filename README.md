@@ -56,6 +56,8 @@ Conviva's CDN supports Brotli and gzip compression. When the browser sends the a
 
 **Note:** Conviva CDN serves DPI sensors starting from version v1.5.5
 
+**Note**: For NPM-based integrations, refer to [Conviva JS DPI SDK (NPM)](https://github.com/Conviva/conviva-js-appanalytics) for guidelines. For Google Tag Manager–based integrations, refer to the [Conviva DPI JS SDK GTM template](https://tagmanager.google.com/gallery/#/owners/Conviva/templates/conviva-dpi-js-sdk-gtm).
+
 <!--eof-self-serve--> 
 ### 2. Initialization
 
