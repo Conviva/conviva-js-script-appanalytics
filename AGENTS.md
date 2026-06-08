@@ -67,6 +67,7 @@ All the Conviva integration code generated into application must be wrapped insi
 | appType            | Yes      | `"SPA"` or `"MPA"`                    |
 | HTML entry point   | Often    | where to add the bootstrap snippet    |
 | user identity      | Often    | for setUserId; verify not PII         |
+| device metadata    | Often    | required for TV/STB environments      |
 | session replay     | Ask      | optional feature — must ask developer |
 
 ---
@@ -247,6 +248,44 @@ window.apptracker('trackFormValidationError', 'REPLACE_ME_FORM_ID', 'REPLACE_ME_
 
 ---
 
+# Device Metadata — Optional (TV/STB only)
+
+Required only for Smart TV or Set-Top Box environments where device metadata cannot be auto-detected. Not needed for standard web/SPA/MPA integrations.
+
+```js
+window.apptracker('convivaAppTracker', {
+  appId: 'REPLACE_ME_APP_ID',
+  convivaCustomerKey: 'REPLACE_ME_CUSTOMER_KEY',
+  appVersion: 'REPLACE_ME_APP_VERSION',
+  deviceMetadata: {
+    DeviceCategory: 'SAMSUNGTV',
+    DeviceType: 'SmartTV',
+    DeviceBrand: 'Samsung'
+  }
+});
+```
+
+## Prescribed values — DeviceCategory and DeviceType are enums
+
+`DeviceCategory` and `DeviceType` are validated against a fixed enum. Agents must never invent values, lowercase them, or pass free-form strings like `"TV"`, `"Hisense"`, or `"SmartTV-Vidaa"`.
+
+**`DeviceCategory` — pass exactly one of:**
+
+`AND` (Android), `APL` (Apple), `CHR` (Chromecast), `DSKAPP` (Desktop app), `KAIOS`, `LGTV` (LG TV), `LNX` (Linux STB/TV), `NINTENDO`, `PS` (PlayStation), `RK` (Roku), `SAMSUNGTV` (Samsung TV), `SIMULATOR`, `VIDAA` (Hisense Vidaa), `VIZIOTV` (Vizio SmartCast), `WEB` (in-browser HTML5), `WIN` (Windows handheld), `XB` (Xbox).
+
+**`DeviceType` — pass exactly one of:**
+
+`DESKTOP`, `Console`, `Settop`, `Mobile`, `Tablet`, `SmartTV`, `Vehicle`, `Other`.
+
+**Invalid value behavior — agents must understand this:**
+
+- Invalid `DeviceCategory` → reported in payload as `"INVALID: <value>"` (e.g. `"TV"` → `"INVALID: TV"`). This breaks device classification in Pulse and is the most common DPI integration mistake.
+- Invalid `DeviceType` → omitted from the payload entirely.
+
+When the developer describes the target device in free form (e.g. "Hisense Vidaa TV", "LG webOS", "Roku"), agents must translate to the correct prescribed `DeviceCategory` value (`VIDAA`, `LGTV`, `RK`) before generating code. If the developer's device does not map cleanly to a prescribed value, ask the developer rather than guessing.
+
+---
+
 # Replay Integration
 
 Verify the latest Replay version from GitHub Tags/Releases before generating the URL.
@@ -359,6 +398,19 @@ window.apptracker('trackFormFieldFocus', 'signup-form'); // invented API
 ```
 
 Do NOT pass PII or raw error messages to `trackFormSubmitError` / `trackFormValidationError` — only short, stable, non-PII identifiers.
+
+Do NOT invent `DeviceCategory` or `DeviceType` values. Pass only the prescribed enum values listed in the Device Metadata section. Invalid `DeviceCategory` values (e.g. `"TV"`, `"Hisense"`, lowercase variants) are emitted as `"INVALID: <value>"` and break Pulse device classification:
+
+```js
+// WRONG
+deviceMetadata: { DeviceCategory: 'TV' }        // invalid → "INVALID: TV"
+deviceMetadata: { DeviceCategory: 'Hisense' }   // invalid → "INVALID: Hisense"
+deviceMetadata: { DeviceCategory: 'samsungtv' } // invalid → wrong case
+
+// CORRECT
+deviceMetadata: { DeviceCategory: 'VIDAA' }     // Hisense Vidaa TV
+deviceMetadata: { DeviceCategory: 'SAMSUNGTV' } // Samsung TV
+```
 
 ---
 
