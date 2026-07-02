@@ -41,7 +41,7 @@ SDK must initialize once, early in page load. Never inside loops, components, or
 
 `trackCustomEvent` must not be added to any integration unless the developer explicitly asks for it.
 
-The manual form-tracking APIs (`trackFormView`, `trackFormSubmitSuccess`, `trackFormSubmitError`, `trackFormValidationError`) must not be added unless the developer explicitly asks for them. Form tracking is primarily an **auto-collected** feature controlled by Conviva remote configuration — no code is required to enable it.
+The manual form-tracking APIs (`trackFormView`, `trackFormSubmitSuccess`, `trackFormSubmitError`, `trackFormValidationError`) must not be added unless the developer explicitly asks for them. Form auto-collection is enabled by default via Conviva remote configuration (`formcc.en: false` to disable). Scroll milestone auto-collection is also enabled by default (`scrollsCollection.enabled: false` to disable).
 
 ## Never hardcode CDN versions
 
@@ -80,6 +80,8 @@ window.apptracker('setUserId', userId);
 window.apptracker('trackPageView');
 window.apptracker('trackPageView', { title: 'Custom Page Title' }); // optional title
 window.apptracker('trackCustomEvent', { name: 'event_name', data: {} }); // [OPTIONAL]
+window.apptracker('setConversationId', conversationId); // [OPTIONAL] W3C baggage conversation ID
+window.apptracker('setMessageId', messageId);             // [OPTIONAL] W3C baggage message ID
 
 // [OPTIONAL] Manual form-tracking APIs — only add when the developer explicitly asks.
 window.apptracker('trackFormView', formId);
