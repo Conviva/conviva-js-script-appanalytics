@@ -1,7 +1,7 @@
 
 # Changelog
 ## 2.2.2 (13/JUL/2026)
-* Fix: Script-tag form API multi-arg forwarding. `window.apptracker('trackFormValidationError', formId, fieldName, errorType)` and `window.apptracker('trackFormSubmitError', formId, errorType)` now forward all arguments through the pre-init queue and immediate dispatch paths, so CTP events include `field_name` and `error_type` as expected. Affects script-tag integration only; npm imports are unchanged.
+* Script-tag form API fix: `trackFormValidationError` and `trackFormSubmitError` now forward all arguments, including calls queued before SDK initialization. Form validation and submit-error events include `field_name` and `error_type` as expected.
 
 
 ## 2.2.1 (02/JUL/2026)
