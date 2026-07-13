@@ -1,5 +1,8 @@
 
 # Changelog
+## 2.2.2 (13/JUL/2026)
+* Script-tag form API fix: `trackFormValidationError` and `trackFormSubmitError` now forward all arguments, including calls queued before SDK initialization. Form validation and submit-error events include `field_name` and `error_type` as expected.
+
 
 ## 2.2.1 (02/JUL/2026)
 * Fix: Soft navigation `load_time` no longer includes time spent in a background tab when the measurement started while the page was visible. If a soft navigation begins in the foreground and the tab is hidden mid-flight, a background watchdog loop keeps the measurement progressing instead of freezing on `requestAnimationFrame`, so `load_time` reflects only the actual navigation duration.
