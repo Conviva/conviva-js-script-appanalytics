@@ -1,5 +1,8 @@
 
 # Changelog
+## 2.2.2 (13/JUL/2026)
+* Fix: Script-tag form API multi-arg forwarding (CE-12138). `window.apptracker('trackFormValidationError', formId, fieldName, errorType)` and `window.apptracker('trackFormSubmitError', formId, errorType)` now forward all arguments through the pre-init queue and immediate dispatch paths, so CTP events include `field_name` and `error_type` as expected. Affects script-tag integration only; npm imports are unchanged.
+
 
 ## 2.2.1 (02/JUL/2026)
 * Fix: Soft navigation `load_time` no longer includes time spent in a background tab when the measurement started while the page was visible. If a soft navigation begins in the foreground and the tab is hidden mid-flight, a background watchdog loop keeps the measurement progressing instead of freezing on `requestAnimationFrame`, so `load_time` reflects only the actual navigation duration.
