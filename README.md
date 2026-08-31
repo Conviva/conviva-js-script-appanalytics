@@ -39,7 +39,7 @@ Below 2 arguments are passed to function one is the global scope in which your a
 }(window, "apptracker"));
 </script>
 ```
-Conviva hosts sensor scripts on its CDN, allowing direct integration via <script> tags without needing a package manager. The CDN URLs follow the pattern below, where the version segment (e.g., v1.5.5, v1.0.1) should be replaced with the desired sensor version:
+Conviva hosts sensor scripts on its CDN, allowing direct integration via <script> tags without needing a package manager. The CDN URLs follow the pattern below, where the version segment (e.g., vv2.3.0, v1.5.5, v1.0.4 etc) should be replaced with the desired sensor version:
 
 To use them, add a script tag to your HTML:
 ```js
@@ -49,12 +49,12 @@ To use them, add a script tag to your HTML:
 example
 ```js
 // Add following tag to your html head section
-<script src="https://sensor.conviva.com/dpi/releases/v1.5.5/convivaAppTracker.js"></script>
+<script src="https://sensor.conviva.com/dpi/releases/v2.3.0/convivaAppTracker.js"></script>
 ```
 
 Conviva's CDN supports Brotli and gzip compression. When the browser sends the appropriate Accept-Encoding header (which modern browsers do by default), the CDN automatically serves a compressed response, reducing download size and improving load times with no additional configuration required.
 
-**Note:** Conviva CDN serves DPI sensors starting from version v1.5.5
+**Note:** Conviva CDN serves DPI sensors starting from version v2.3.0
 
 **Note**: For NPM-based integrations, refer to [Conviva JS DPI SDK (NPM)](https://github.com/Conviva/conviva-js-appanalytics) for guidelines. For Google Tag Manager–based integrations, refer to the [Conviva DPI JS SDK GTM template](https://tagmanager.google.com/gallery/#/owners/Conviva/templates/conviva-dpi-js-sdk-gtm).
 

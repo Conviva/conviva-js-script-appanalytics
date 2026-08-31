@@ -1,4 +1,4 @@
-# AGENTS.md
+# [AGENTS.md](http://AGENTS.md)
 
 Conviva JavaScript Script App Analytics SDK — AI Agent Integration Specification
 
@@ -51,13 +51,21 @@ Agents must not hardcode the SDK CDN version unless the developer explicitly req
 - If the latest version cannot be verified, use a placeholder: `vREPLACE_ME_VERSION`
 - This applies to both the DPI script and the Replay script.
 
+
+
 ## Always wrap integration code using try-catch
 
 All the Conviva integration code generated into application must be wrapped inside try catch blocks. They must not cause unhandled exceptions or crashes.
 
+## Add comments 
+All the Conviva integration code generated into application must follow a comment describing the integration code.
+
 ---
 
+
+
 # Required Inputs Before Integration
+
 
 | Field              | Required | Purpose / Example                     |
 | ------------------ | -------- | ------------------------------------- |
@@ -70,7 +78,10 @@ All the Conviva integration code generated into application must be wrapped insi
 | device metadata    | Often    | required for TV/STB environments      |
 | session replay     | Ask      | optional feature — must ask developer |
 
+
 ---
+
+
 
 # Allowed API Surface
 
@@ -92,7 +103,11 @@ window.apptracker('trackFormValidationError', formId, fieldName, errorType);
 
 ---
 
+
+
 # Agent Integration Workflow
+
+
 
 ### Step 1 — Identify app type
 
@@ -119,6 +134,8 @@ Place in `<head>` before the CDN script:
 </script>
 ```
 
+
+
 ### Step 4 — Add CDN script
 
 Verify the latest version from GitHub Tags/Releases before generating the URL:
@@ -126,6 +143,8 @@ Verify the latest version from GitHub Tags/Releases before generating the URL:
 ```html
 <script src="https://sensor.conviva.com/dpi/releases/vREPLACE_ME_VERSION/convivaAppTracker.js"></script>
 ```
+
+
 
 ### Step 5 — Initialize SDK
 
@@ -136,6 +155,8 @@ window.apptracker('convivaAppTracker', {
   appVersion: 'REPLACE_ME_APP_VERSION'
 });
 ```
+
+
 
 ### Step 6 — Set user identity
 
@@ -156,6 +177,8 @@ window.apptracker('trackPageView', { title: 'Page Title' });
 ```
 
 ---
+
+
 
 # Page View Tracking Rules
 
@@ -179,6 +202,8 @@ useEffect(() => {
 }, []);
 ```
 
+
+
 ### React SPA With Router — fire on every route change
 
 ```js
@@ -186,6 +211,8 @@ useEffect(() => {
   window.apptracker('trackPageView');
 }, [location]);
 ```
+
+
 
 ## MPA
 
@@ -196,6 +223,8 @@ window.addEventListener('load', () => {
 ```
 
 ---
+
+
 
 # Custom Event Tracking — Optional
 
@@ -211,6 +240,8 @@ window.apptracker('trackCustomEvent', {
 Rules: stable event names, small payloads, no sensitive data.
 
 ---
+
+
 
 # Form Tracking — Optional
 
@@ -241,6 +272,8 @@ window.apptracker('trackFormSubmitError', 'REPLACE_ME_FORM_ID', 'REPLACE_ME_ERRO
 window.apptracker('trackFormValidationError', 'REPLACE_ME_FORM_ID', 'REPLACE_ME_FIELD_NAME', 'REPLACE_ME_ERROR_TYPE');
 ```
 
+
+
 ## Rules for manual form APIs
 
 - The `formId` passed to manual APIs must match the form's DOM `id` (or `data-form-id`) so manual events correlate with auto-collected `conviva_form_*` events.
@@ -249,6 +282,8 @@ window.apptracker('trackFormValidationError', 'REPLACE_ME_FORM_ID', 'REPLACE_ME_
 - Do not invent new form APIs. Only the four APIs listed above exist.
 
 ---
+
+
 
 # Device Metadata — Optional (TV/STB only)
 
@@ -267,15 +302,17 @@ window.apptracker('convivaAppTracker', {
 });
 ```
 
+
+
 ## Prescribed values — DeviceCategory and DeviceType are enums
 
 `DeviceCategory` and `DeviceType` are validated against a fixed enum. Agents must never invent values, lowercase them, or pass free-form strings like `"TV"`, `"Hisense"`, or `"SmartTV-Vidaa"`.
 
-**`DeviceCategory` — pass exactly one of:**
+`DeviceCategory` **— pass exactly one of:**
 
 `AND` (Android), `APL` (Apple), `CHR` (Chromecast), `DSKAPP` (Desktop app), `KAIOS`, `LGTV` (LG TV), `LNX` (Linux STB/TV), `NINTENDO`, `PS` (PlayStation), `RK` (Roku), `SAMSUNGTV` (Samsung TV), `SIMULATOR`, `VIDAA` (Hisense Vidaa), `VIZIOTV` (Vizio SmartCast), `WEB` (in-browser HTML5), `WIN` (Windows handheld), `XB` (Xbox).
 
-**`DeviceType` — pass exactly one of:**
+`DeviceType` **— pass exactly one of:**
 
 `DESKTOP`, `Console`, `Settop`, `Mobile`, `Tablet`, `SmartTV`, `Vehicle`, `Other`.
 
@@ -288,11 +325,13 @@ When the developer describes the target device in free form (e.g. "Hisense Vidaa
 
 ---
 
+
+
 # Replay Integration
 
 Verify the latest Replay version from GitHub Tags/Releases before generating the URL.
 
-**Version compatibility:** Cohort Replay **v1.0.4 or later** is required when integrating with Conviva DPI script SDK v2.2.0 or later (see https://github.com/Conviva/conviva-js-replay/releases/tag/v1.0.4). Earlier replay versions are not compatible with DPI v2.2.0+ for session synchronization.
+**Version compatibility:** Cohort Replay **v1.0.4 or later** is required when integrating with Conviva DPI script SDK v2.2.0 or later (see [https://github.com/Conviva/conviva-js-replay/releases/tag/v1.0.4](https://github.com/Conviva/conviva-js-replay/releases/tag/v1.0.4)). Earlier replay versions are not compatible with DPI v2.2.0+ for session synchronization.
 
 ```html
 <script src="https://sensor.conviva.com/replay/releases/vREPLACE_ME_VERSION/conviva-replay.umd.min.js"></script>
@@ -304,6 +343,8 @@ Verify the latest Replay version from GitHub Tags/Releases before generating the
 Replay must initialize **before** `convivaAppTracker`. Incorrect order will break replay.
 
 ---
+
+
 
 # Client ID Synchronization
 
@@ -321,8 +362,11 @@ window.apptracker('convivaAppTracker', {
 });
 ```
 
+
+
 ## *Optional*
-**Agents must NOT implement `getClientId` or `setClientId` unless the developer explicitly requests it.**
+
+**Agents must NOT implement** `getClientId` **or** `setClientId` **unless the developer explicitly requests it.**
 
 These APIs are for special use cases only, such as synchronizing a Conviva client ID across multiple domains or subdomains. These APIs must be used only when enableClidInCookies is set to false during initialization.
 Do not add them to a standard single-domain integration.
@@ -333,6 +377,8 @@ When requested:
 window.apptracker('getClientId');          // call after initialization
 window.apptracker('setClientId', clientId);  // call before initialization
 ```
+
+
 
 ## Native + WebView combined session — do NOT implement in app JS
 
@@ -349,6 +395,8 @@ Agents must NOT generate any JS in the web app to detect, call, polyfill, or shi
 
 ---
 
+
+
 # Content Security Policy
 
 ```
@@ -359,6 +407,8 @@ Replay may also require: `worker-src 'self' blob:;`
 
 ---
 
+
+
 # Troubleshooting
 
 - **No data** → check: script loaded, SDK initialized, placeholders replaced, CSP not blocking
@@ -367,6 +417,8 @@ Replay may also require: `worker-src 'self' blob:;`
 - **Replay broken** → check: Replay script loaded and `ConvivaReplay.init()` called BEFORE `convivaAppTracker`
 
 ---
+
+
 
 # Anti-Hallucination Rules
 
@@ -416,6 +468,8 @@ deviceMetadata: { DeviceCategory: 'SAMSUNGTV' } // Samsung TV
 
 ---
 
+
+
 # Mandatory Prompt Template for AI Agents
 
 Before generating final integration code, agents must request:
@@ -430,3 +484,4 @@ To integrate Conviva App Analytics I need:
 5. Where does user identity come from?
 6. Should session replay be enabled?
 ```
+

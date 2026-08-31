@@ -1,5 +1,9 @@
 
 # Changelog
+## 2.3.0 (31/Aug/2026)
+* Richer Click Attribution: The sensor can now capture contextual labels from parent DOM elements (e.g., carousel names, section identifiers) when a click target lacks meaningful metadata — enabling more accurate and actionable user interaction analytics.
+* Enhanced Privacy Compliance: Email and phone number input fields are now automatically excluded from value collection, strengthening PII safeguards in line with GDPR and CCPA requirements.
+
 ## 2.2.2 (13/JUL/2026)
 * Script-tag form API fix: `trackFormValidationError` and `trackFormSubmitError` now forward all arguments, including calls queued before SDK initialization. Form validation and submit-error events include `field_name` and `error_type` as expected.
 
