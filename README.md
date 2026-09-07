@@ -587,7 +587,7 @@ window.apptracker('trackNetworkRequest',{ requestDetails, responseDetails });
 <!--self-serve-custom-event-->
 <summary><b>Form Tracking</b></summary>
 
-The SDK can automatically track form interactions on a page. Form auto-collection is enabled by default via Conviva remote configuration; disable with `formcc.en: false` if not needed.
+The SDK can automatically track form interactions on a page. Form auto-collection is enabled by default via Conviva remote configuration; disable with `formcc.en: false` if not needed. Open shadow roots are included automatically. Closed shadow roots are not. Disable shadow-root collection with `formcc.trackShadowDom: false` if not needed.
 
 **Manual form APIs**
 
@@ -735,7 +735,7 @@ page_loaded             | On "load" event listener | Used to compute Page Loads,
 | Event source message stream | When Event source events occur (open, send, message, error) for real-time communication tracking. |
 | Core Web Vitals (LCP, INP, CLS) | At pagehide/visibilitychange | Automatically collects Core Web Vitals using [web-vitals](https://www.npmjs.com/package/web-vitals/v/5.1.0). LCP: Chromium, Firefox. INP, CLS: Chromium. Enabled when `webVitals.enabled: true` in remote config. |
 | Supplementary Web Vitals (FCP, TTFB) | Early in page load, once after navigation | FCP (First Contentful Paint) and TTFB (Time to First Byte). Browser support: Chromium, Firefox, Safari. Enabled when both `webVitals.enabled: true` and `webVitals.enabledAdditionalMetrics: true` in remote config. |
-| form_tracking                        | When form: start, field-blur, submit, validation(only Html5 Validation) events occur                                             | Automatically collects form life cycle events. Enabled by default via remote configuration (`formcc.en: false` to disable). See [Form Tracking](#more-features) for more details                                                                                                       |
+| form_tracking                        | When form: start, field-blur, submit, validation(only Html5 Validation) events occur                                             | Automatically collects form life cycle events, including forms inside open shadow roots. Closed shadow roots are not collected. Enabled by default via remote configuration (`formcc.en: false` to disable). See [Form Tracking](#more-features) for more details. [Refer limitations](#limitations). |
 | scroll_tracking                      | When the user crosses a configured scroll-depth threshold or when a viewport resize / orientation change resets milestone state. | Automatically captures scroll milestones, scroll resets, and scroll depth. Reports viewport width, page height, page width, scroll position (scrollY), and related metrics. Enabled by default; disable via remote configuration (`scrollsCollection.enabled: false`). |
 
 To learn about the default metrics for analyzing the native and web applications performance, such as App Crashes, Avg Screen Load Time, and Page Loads, refer to the [DPI Metrics](https://pulse.conviva.com/learning-center/content/eco/eco_metrics.html) page in the Learning Center.
@@ -764,6 +764,15 @@ To ensure metrics reflect the updates, please review and update your event/metri
 | elementValue                   | value                          |
 | elementId                      | id                             |
 | elementClasses                 | class                          |
+
+</details>
+
+<details>
+  <summary><b>form_tracking</b></summary>
+
+Form auto-collection includes fields inside **open** shadow roots (for example Salesforce LWC). **Closed** shadow roots are not collected — the browser does not expose those fields to page listeners.
+
+Disable shadow-root collection with `formcc.trackShadowDom: false` if not needed. Validation events cover HTML5 constraint validation only.
 
 </details>
 
