@@ -245,7 +245,7 @@ Rules: stable event names, small payloads, no sensitive data.
 
 # Form Tracking — Optional
 
-**Form tracking is primarily an auto-collected feature controlled by Conviva remote configuration.** When enabled remotely, the SDK automatically captures the following events with no code changes:
+**Form tracking is primarily an auto-collected feature controlled by Conviva remote configuration.** When enabled remotely, the SDK automatically captures the following events with no code changes. Open shadow roots are included automatically. Closed shadow roots are not. Disable with `formcc.trackShadowDom: false` if not needed.
 
 - `conviva_form_start` — first user interaction with a form
 - `conviva_form_field_blur` — field loses focus (sensitive/denylisted fields are redacted)
@@ -435,7 +435,7 @@ Do NOT invent config flags:
 
 ```js
 // WRONG
-window.apptracker('convivaAppTracker', { autoTrackPages: true });
+window.apptracker('convivaAppTracker', { autoTrackPages: true, trackShadowDom: true });
 ```
 
 Do NOT assume replay is built-in — it requires a separate CDN script.
